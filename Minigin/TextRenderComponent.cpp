@@ -8,7 +8,7 @@
 #include "TransformComponent.h"
 
 TextRenderComponent::TextRenderComponent(GameObject* const parent, std::string text, const std::shared_ptr<Font>& font)
-	:BaseComponent(parent)
+	:BaseComponent(parent,true)
 	,m_Font(font)
 	,m_Texture(nullptr)
     ,m_pTransform(nullptr)
@@ -36,9 +36,8 @@ void TextRenderComponent::Render()
 	}
 }
 
-void TextRenderComponent::Update(const float& deltaTime)
+void TextRenderComponent::Update(const float& )
 {
-	deltaTime;
 }
 
 void TextRenderComponent::SetText(const std::string& text)

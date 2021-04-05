@@ -5,7 +5,7 @@
 #include "TransformComponent.h"
 #include "ResourceManager.h"
 TextureRenderComponent::TextureRenderComponent(GameObject* const parent, std::string texturePath)
-	:BaseComponent(parent)
+	:BaseComponent(parent,true)
 	, m_pTexture(nullptr)
 {
 	m_pTexture = ResourceManager::GetInstance().LoadTexture(texturePath);
@@ -31,9 +31,8 @@ void TextureRenderComponent::Render()
 	}
 }
 
-void TextureRenderComponent::Update(const float& deltaTime)
+void TextureRenderComponent::Update(const float& )
 {
-	deltaTime;
 }
 
 void TextureRenderComponent::SetTexture(std::shared_ptr<Texture2D> texture)

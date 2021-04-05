@@ -6,7 +6,7 @@
 #include "TextRenderComponent.h"
 
 TimeComponent::TimeComponent(GameObject* const parent,bool renderFPS)
-	:BaseComponent(parent)
+	:BaseComponent(parent,false,true)
 	,m_RenderFPS(renderFPS)
 	,m_DeltaTime(0)
 {

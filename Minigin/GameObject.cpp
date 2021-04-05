@@ -16,7 +16,10 @@ void GameObject::Update(const float& deltaTime)
 {
 	for (BaseComponent* component : m_Components)
 	{
-		component->Update(deltaTime);
+		if (component->GetIsUpdatable())
+		{
+			component->Update(deltaTime);
+		}
 	}
 }
 
@@ -24,7 +27,10 @@ void GameObject::Render() const
 {
 	for (BaseComponent* component : m_Components)
 	{
-		component->Render();
+		if (component->GetIsRenderable())
+		{
+			component->Render();
+		}
 	}
 }
 
