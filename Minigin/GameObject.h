@@ -4,10 +4,7 @@
 #include "TransformComponent.h"
 
 #include "BaseScript.h"
-
 #include "map"
-#include "Subject.h"
-
 
 class Texture2D;
 class GameObject final
@@ -27,13 +24,9 @@ public:
 	template<class component> component* GetComponent();
 
 	template<class component> std::vector<component*> GetComponents();
-		
-	Subject* GetSubject();
 
 private:
 	std::vector<BaseComponent*> m_Components{};
-	
-	Subject* m_pSubject = new Subject();
 };
 
 template <class component>

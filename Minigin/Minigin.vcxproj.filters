@@ -120,13 +120,10 @@
     <ClInclude Include="Command.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="Obserever.h">
+    <ClInclude Include="Observer.h">
       <Filter>Source Files\Obserever</Filter>
     </ClInclude>
     <ClInclude Include="Lives.h">
-      <Filter>Source Files\Obserever</Filter>
-    </ClInclude>
-    <ClInclude Include="Subject.h">
       <Filter>Source Files\Obserever</Filter>
     </ClInclude>
     <ClInclude Include="Score.h">
@@ -137,6 +134,12 @@
     </ClInclude>
     <ClInclude Include="SoundSystem.h">
       <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="SubjectComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ObserverComponent.h">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -215,13 +218,10 @@
     <ClCompile Include="Command.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="Obserever.cpp">
+    <ClCompile Include="Observer.cpp">
       <Filter>Source Files\Obserever</Filter>
     </ClCompile>
     <ClCompile Include="Lives.cpp">
-      <Filter>Source Files\Obserever</Filter>
-    </ClCompile>
-    <ClCompile Include="Subject.cpp">
       <Filter>Source Files\Obserever</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
@@ -232,6 +232,12 @@
     </ClCompile>
     <ClCompile Include="SoundSystem.cpp">
       <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="SubjectComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ObserverComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

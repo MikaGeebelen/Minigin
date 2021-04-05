@@ -221,11 +221,12 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClInclude Include="Lives.h" />
     <ClInclude Include="Minigin.h" />
     <ClInclude Include="MiniginPCH.h" />
-    <ClInclude Include="Obserever.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="ObserverComponent.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="ServiceLocater.h" />
     <ClInclude Include="SoundSystem.h" />
-    <ClInclude Include="Subject.h" />
+    <ClInclude Include="SubjectComponent.h" />
     <ClInclude Include="TextRenderComponent.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -296,11 +297,12 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MiniginPCH.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Obserever.cpp" />
+    <ClCompile Include="Observer.cpp" />
+    <ClCompile Include="ObserverComponent.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="ServiceLocater.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
-    <ClCompile Include="Subject.cpp" />
+    <ClCompile Include="SubjectComponent.cpp" />
     <ClCompile Include="TextRenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />

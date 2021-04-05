@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
-#include "Subject.h"
 #include "ServiceLocater.h"
+#include "SubjectComponent.h"
+#include "Observer.h"
 class Command
 {
 public:
@@ -12,21 +13,21 @@ public:
 class Die : public Command
 {
 public:
-	Die(Subject* subject):m_pSubject(subject)
+	Die(SubjectComponent* subject):m_pSubject(subject)
 	{}
-	void Execute() override { m_pSubject->Notify(Obserever::Event::died); };
+	void Execute() override { m_pSubject->Notify(Observer::Died); };
 private:
-	Subject* m_pSubject = nullptr;
+	SubjectComponent* m_pSubject = nullptr;
 };
 
 class GainPoints : public Command
 {
 public:
-	GainPoints(Subject* subject) :m_pSubject(subject)
+	GainPoints(SubjectComponent* subject) :m_pSubject(subject)
 	{}
-	void Execute() override { m_pSubject->Notify(Obserever::Event::coily); };
+	void Execute() override { m_pSubject->Notify(Observer::Coily); };
 private:
-	Subject* m_pSubject = nullptr;
+	SubjectComponent* m_pSubject = nullptr;
 };
 
 class DiamondSound : public Command

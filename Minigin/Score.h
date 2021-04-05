@@ -1,11 +1,11 @@
 #pragma once
-#include "Obserever.h"
-#include "TextRenderComponent.h"
-class Score : public Obserever
+#include "Observer.h"
+class TextRenderComponent;
+class Score : public Observer
 {
 public:
 	Score(TextRenderComponent* text, int score);
-	void OnNotify(Event event) override;
+	virtual void OnNotify(Events event) override;
 
 private:
 	TextRenderComponent* m_pText;

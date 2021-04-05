@@ -2,14 +2,13 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
-#include "Subject.h"
+
 GameObject::~GameObject()
 {
 	for (BaseComponent* component : m_Components)
 	{
 		delete component;
 	}
-	delete m_pSubject;
 }
 
 void GameObject::Update(const float& deltaTime)
@@ -34,10 +33,6 @@ void GameObject::Render() const
 	}
 }
 
-Subject* GameObject::GetSubject()
-{
-	return m_pSubject;
-}
 
 
 

@@ -1,5 +1,6 @@
 #include "MiniginPCH.h"
 #include "Lives.h"
+#include "TextRenderComponent.h"
 
 Lives::Lives(TextRenderComponent* text, int lives)
 	:m_pText(text)
@@ -7,10 +8,11 @@ Lives::Lives(TextRenderComponent* text, int lives)
 {
 }
 
-void Lives::OnNotify(Event event)
+void Lives::OnNotify(Events event)
 {
-	if (event == Event::died)
+	switch (event)
 	{
+	case Events::Died:
 		m_Lives--;
 		if (m_Lives <= 0)
 		{
@@ -18,5 +20,6 @@ void Lives::OnNotify(Event event)
 			return;
 		}
 		m_pText->SetText("Lives: " + std::to_string(m_Lives));
+		break;
 	}
 }

@@ -14,9 +14,10 @@
 #include "TextRenderComponent.h"
 #include "TextureRenderComponent.h"
 #include "TimeComponent.h"
+#include "ObserverComponent.h"
+#include "SubjectComponent.h"
 //observer
-#include "Subject.h"
-#include "Obserever.h"
+#include "Observer.h"
 #include "Lives.h"
 #include "Score.h"
 //services
@@ -28,8 +29,6 @@ using namespace std::chrono;
 
 void Minigin::Initialize()
 {
-	m_pSubject = new Subject();
-	
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) 
 	{
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
@@ -84,46 +83,67 @@ void Minigin::LoadGame() const
 	go->AddComponent(new TimeComponent(go.get(),true));
 	scene.Add(go);
 
+	//Qbert 1
+	go = std::make_shared<GameObject>();
+	go->AddComponent(new TransformComponent(go.get(), 0.f, 0.f, 0.f));
+	SubjectComponent* pQbertSubject = new SubjectComponent(go.get());
+	go->AddComponent(pQbertSubject);
+	scene.Add(go);
+	
+	InputManager::GetInstance().AddKeyBoardCommand("die1", SDL_SCANCODE_Q, ActionType::pressed, new Die(pQbertSubject));
+	InputManager::GetInstance().AddKeyBoardCommand("Score1", SDL_SCANCODE_A, ActionType::pressed, new GainPoints(pQbertSubject));
+
+	
 	go = std::make_shared<GameObject>();
 	go->AddComponent(new TransformComponent(go.get(), 0.f, 400.f, 0.f));
 	TextRenderComponent* pLives = new TextRenderComponent(go.get(), "Lives: 5", font);
-	Lives* livesObserver = new Lives(pLives, 5);
-	go->GetSubject()->AddObserver(livesObserver);
+	ObserverComponent* pQbertLives = new ObserverComponent(go.get(), new Lives(pLives, 5));
+	go->AddComponent(pQbertLives);
+	pQbertSubject->AddObserver(pQbertLives);
 	go->AddComponent(pLives);
 	scene.Add(go);
 	
-	InputManager::GetInstance().AddKeyBoardCommand("die1", SDL_SCANCODE_Q, ActionType::pressed, new Die(go->GetSubject()));
+
 
 	go = std::make_shared<GameObject>();
 	go->AddComponent(new TransformComponent(go.get(), 0.f, 430.f, 0.f));
 	TextRenderComponent* pScore = new TextRenderComponent(go.get(), "Score: 0", font);
-	Score* pScoreObserver = new Score(pScore, 0);
-	go->GetSubject()->AddObserver(pScoreObserver);
+	ObserverComponent* pQbertScoreObserver = new ObserverComponent(go.get(),new Score(pScore, 0));
+	go->AddComponent(pQbertScoreObserver);
+	pQbertSubject->AddObserver(pQbertScoreObserver);
 	go->AddComponent(pScore);
 	scene.Add(go);
 	
-	InputManager::GetInstance().AddKeyBoardCommand("Score1", SDL_SCANCODE_A, ActionType::pressed, new GainPoints(go->GetSubject()));
+	//Qbert 2
+	go = std::make_shared<GameObject>();
+	go->AddComponent(new TransformComponent(go.get(), 0.f, 0.f, 0.f));
+	pQbertSubject = new SubjectComponent(go.get());
+	go->AddComponent(pQbertSubject);
+	scene.Add(go);
+	
+	InputManager::GetInstance().AddKeyBoardCommand("die2", SDL_SCANCODE_W, ActionType::pressed, new Die(pQbertSubject));
+	InputManager::GetInstance().AddKeyBoardCommand("Score2", SDL_SCANCODE_S, ActionType::pressed, new GainPoints(pQbertSubject));
 	
 	go = std::make_shared<GameObject>();
 	go->AddComponent(new TransformComponent(go.get(), 400.f, 400.f, 0.f));
 	pLives = new TextRenderComponent(go.get(), "Lives: 5", font);
-	livesObserver = new Lives(pLives, 5);
-	go->GetSubject()->AddObserver(livesObserver);
+	pQbertLives = new ObserverComponent(go.get(), new Lives(pLives, 5));
+	go->AddComponent(pQbertLives);
+	pQbertSubject->AddObserver(pQbertLives);
 	go->AddComponent(pLives);
 	scene.Add(go);
 	
-	InputManager::GetInstance().AddKeyBoardCommand("die2", SDL_SCANCODE_W, ActionType::pressed, new Die(go->GetSubject()));
+
 
 	go = std::make_shared<GameObject>();
 	go->AddComponent(new TransformComponent(go.get(), 400.f, 430.f, 0.f));
 	pScore = new TextRenderComponent(go.get(), "Score: 0", font);
-	pScoreObserver = new Score(pScore, 0);
-	go->GetSubject()->AddObserver(pScoreObserver);
+	pQbertScoreObserver = new ObserverComponent(go.get(), new Score(pScore, 0));
+	go->AddComponent(pQbertScoreObserver);
+	pQbertSubject->AddObserver(pQbertScoreObserver);
 	go->AddComponent(pScore);
 	scene.Add(go);
 	
-	InputManager::GetInstance().AddKeyBoardCommand("Score2", SDL_SCANCODE_S, ActionType::pressed, new GainPoints(go->GetSubject()));
-
 	InputManager::GetInstance().AddKeyBoardCommand("DSound", SDL_SCANCODE_E, ActionType::pressed, new DiamondSound());
 	InputManager::GetInstance().AddKeyBoardCommand("OSound", SDL_SCANCODE_D, ActionType::pressed, new OuchSound());
 	InputManager::GetInstance().AddKeyBoardCommand("Switch1", SDL_SCANCODE_R, ActionType::pressed, new SwitchToLogSoundSystem());
@@ -133,7 +153,6 @@ void Minigin::LoadGame() const
 void Minigin::Cleanup()
 {
 	ServiceLocater::DestroySoundSystem();
-	delete m_pSubject;
 	
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(m_Window);
