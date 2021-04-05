@@ -31,29 +31,17 @@
     <Filter Include="Imgui">
       <UniqueIdentifier>{c96ed076-1f3e-49e6-a77a-01a6ce1b969b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input">
-      <UniqueIdentifier>{34f76141-a4f5-468c-9ea7-27b0d02d02bc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Obserever">
       <UniqueIdentifier>{9eb803c9-6ff7-4747-94b9-bfbdf0980cd4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Services">
       <UniqueIdentifier>{31cc2737-963d-4688-883c-fb420fe9c12c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{34f76141-a4f5-468c-9ea7-27b0d02d02bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Singleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Source Files\Objects</Filter>
     </ClInclude>
@@ -115,10 +103,10 @@
       <Filter>Imgui</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Input</Filter>
+      <Filter>Source Files\Input</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
-      <Filter>Input</Filter>
+      <Filter>Source Files\Input</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
       <Filter>Source Files\Obserever</Filter>
@@ -141,20 +129,20 @@
     <ClInclude Include="ObserverComponent.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Source Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Source Files\Minigin</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Source Files\Minigin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
@@ -213,10 +201,10 @@
       <Filter>Imgui</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Input</Filter>
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
     <ClCompile Include="Command.cpp">
-      <Filter>Input</Filter>
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
     <ClCompile Include="Observer.cpp">
       <Filter>Source Files\Obserever</Filter>
@@ -238,6 +226,18 @@
     </ClCompile>
     <ClCompile Include="ObserverComponent.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files\Minigin</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Minigin</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

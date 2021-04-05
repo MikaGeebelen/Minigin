@@ -93,7 +93,6 @@ void Minigin::LoadGame() const
 	InputManager::GetInstance().AddKeyBoardCommand("die1", SDL_SCANCODE_Q, ActionType::pressed, new Die(pQbertSubject));
 	InputManager::GetInstance().AddKeyBoardCommand("Score1", SDL_SCANCODE_A, ActionType::pressed, new GainPoints(pQbertSubject));
 
-	
 	go = std::make_shared<GameObject>();
 	go->AddComponent(new TransformComponent(go.get(), 0.f, 400.f, 0.f));
 	TextRenderComponent* pLives = new TextRenderComponent(go.get(), "Lives: 5", font);
@@ -102,8 +101,6 @@ void Minigin::LoadGame() const
 	pQbertSubject->AddObserver(pQbertLives);
 	go->AddComponent(pLives);
 	scene.Add(go);
-	
-
 
 	go = std::make_shared<GameObject>();
 	go->AddComponent(new TransformComponent(go.get(), 0.f, 430.f, 0.f));
@@ -133,8 +130,6 @@ void Minigin::LoadGame() const
 	go->AddComponent(pLives);
 	scene.Add(go);
 	
-
-
 	go = std::make_shared<GameObject>();
 	go->AddComponent(new TransformComponent(go.get(), 400.f, 430.f, 0.f));
 	pScore = new TextRenderComponent(go.get(), "Score: 0", font);
