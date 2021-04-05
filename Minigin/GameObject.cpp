@@ -5,26 +5,26 @@
 #include "Subject.h"
 dae::GameObject::~GameObject()
 {
-	for (std::pair<std::string, BaseComponent*> comp : m_Components)
+	for (BaseComponent* component : m_Components)
 	{
-		delete comp.second;
+		delete component;
 	}
 	delete m_pSubject;
 }
 
 void dae::GameObject::Update(const float& deltaTime)
 {
-	for(std::pair<std::string,BaseComponent*> comp : m_Components)
+	for (BaseComponent* component : m_Components)
 	{
-		comp.second->Update(deltaTime);
+		component->Update(deltaTime);
 	}
 }
 
 void dae::GameObject::Render() const
 {
-	for (std::pair<std::string, BaseComponent*> comp : m_Components)
+	for (BaseComponent* component : m_Components)
 	{
-		comp.second->Render();
+		component->Render();
 	}
 }
 

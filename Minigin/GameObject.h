@@ -1,6 +1,5 @@
 #pragma once
 #include "Transform.h"
-#include "SceneObject.h"
 #include "BaseComponent.h"
 #include "TransformComponent.h"
 
@@ -28,10 +27,13 @@ namespace dae
 		template<class component> void AddComponent(component* comp);
 		template<class component> component* GetComponent();
 
+		template<class component> std::vector<component*> GetComponents();
+		
 		Subject* GetSubject();
 
 	private:
-		std::map<std::string, BaseComponent*> m_Components{};
+		std::vector<BaseComponent*> m_Components{};
+		
 		Subject* m_pSubject = new Subject();
 	};
 
@@ -39,24 +41,37 @@ namespace dae
 	void GameObject::AddComponent(component* pComp)
 	{
 		static_assert(std::is_base_of<BaseComponent, component>::value, "The provided component does not derive from the BaseComponent Class");
-		if (m_Components.find(typeid(pComp).name()) != m_Components.end())
-		{
-			assert("Component is added twice");
-		}
-		m_Components[typeid(pComp).name()] = pComp;
+		m_Components.push_back(pComp);
 	}
 
 	template <class component>
 	component* GameObject::GetComponent()
 	{
-		if (m_Components.find(typeid(component*).name()) != m_Components.end())
+		for (int i = 0; i < m_Components.size(); i++ )
 		{
-			return static_cast<component*>(m_Components.find(typeid(component*).name())->second);
+			component* pComponent = dynamic_cast<component*>(m_Components[i]);
+			if (pComponent != nullptr)
+			{
+				return pComponent;
+			}
 		}
-		else
+		return nullptr;
+		
+	}
+
+	template <class component>
+	std::vector<component*> GameObject::GetComponents()
+	{
+		std::vector<component*> components{};
+		for (int i = 0; i < m_Components.size(); i++)
 		{
-			assert("Component does not exist");
-			return nullptr;
+			component* pComponent = dynamic_cast<component*>(m_Components[i]);
+			if (pComponent != nullptr)
+			{
+				components.push_back(pComponent);
+			}
 		}
+
+		return components;
 	}
 }

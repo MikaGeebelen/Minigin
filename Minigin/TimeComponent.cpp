@@ -39,7 +39,6 @@ void TimeComponent::Update(const float& deltaTime)
 		fpsText = std::to_string(GetFPS()) + " FPS";
 		m_pText->SetText(fpsText);
 	}
-
 }
 
 void TimeComponent::Render()
