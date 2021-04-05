@@ -3,7 +3,7 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include "Subject.h"
-dae::GameObject::~GameObject()
+GameObject::~GameObject()
 {
 	for (BaseComponent* component : m_Components)
 	{
@@ -12,7 +12,7 @@ dae::GameObject::~GameObject()
 	delete m_pSubject;
 }
 
-void dae::GameObject::Update(const float& deltaTime)
+void GameObject::Update(const float& deltaTime)
 {
 	for (BaseComponent* component : m_Components)
 	{
@@ -20,7 +20,7 @@ void dae::GameObject::Update(const float& deltaTime)
 	}
 }
 
-void dae::GameObject::Render() const
+void GameObject::Render() const
 {
 	for (BaseComponent* component : m_Components)
 	{

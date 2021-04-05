@@ -1,12 +1,12 @@
 #pragma once
 #include "BaseComponent.h"
 
-using namespace dae;
+class GameObject;
 class TransformComponent :public BaseComponent
 {
 public:
-	TransformComponent(dae::GameObject* const parent, Transform* transform);
-	TransformComponent(dae::GameObject* const parent, const float& x, const float& y, const float& z);
+	TransformComponent(GameObject* const parent, Transform* transform);
+	TransformComponent(GameObject* const parent, const float& x, const float& y, const float& z);
 	~TransformComponent();
 	TransformComponent(const TransformComponent& other) = delete;
 	TransformComponent(TransformComponent&& other) = delete;

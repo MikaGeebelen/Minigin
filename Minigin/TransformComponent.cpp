@@ -1,13 +1,13 @@
 #include "MiniginPCH.h"
 #include "TransformComponent.h"
 
-TransformComponent::TransformComponent(dae::GameObject* const parent, Transform* transform)
+TransformComponent::TransformComponent(GameObject* const parent, Transform* transform)
 	:BaseComponent(parent)
 	,m_pTransform(transform)
 {
 }
 
-TransformComponent::TransformComponent(dae::GameObject* const parent,const float& x, const float& y, const float& z)
+TransformComponent::TransformComponent(GameObject* const parent,const float& x, const float& y, const float& z)
 	:BaseComponent(parent)
 {
 	m_pTransform = new Transform{};
@@ -23,9 +23,8 @@ void TransformComponent::Render()
 {
 }
 
-void TransformComponent::Update(const float& deltaTime)
+void TransformComponent::Update(const float& )
 {
-	deltaTime;
 }
 
 void TransformComponent::SetPosition(const float& x, const float& y, const float& z)

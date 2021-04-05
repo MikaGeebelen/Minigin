@@ -7,7 +7,7 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 
-TextRenderComponent::TextRenderComponent(dae::GameObject* const parent, std::string text, const std::shared_ptr<Font>& font)
+TextRenderComponent::TextRenderComponent(GameObject* const parent, std::string text, const std::shared_ptr<Font>& font)
 	:BaseComponent(parent)
 	,m_Font(font)
 	,m_Texture(nullptr)

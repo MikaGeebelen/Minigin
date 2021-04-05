@@ -1,13 +1,12 @@
 #pragma once
 #include "BaseComponent.h"
-
 #include "Texture2D.h"
 #include "Renderer.h"
-using namespace dae;
+
 class TextureRenderComponent :public BaseComponent
 {
 public:
-	TextureRenderComponent(dae::GameObject* const parent, std::string texturePath);
+	TextureRenderComponent(GameObject* const parent, std::string texturePath);
 	~TextureRenderComponent();
 	TextureRenderComponent(const TextureRenderComponent& other) = delete;
 	TextureRenderComponent(TextureRenderComponent&& other) = delete;

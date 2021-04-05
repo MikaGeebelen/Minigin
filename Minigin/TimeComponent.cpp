@@ -5,7 +5,7 @@
 #include "BaseComponent.h"
 #include "TextRenderComponent.h"
 
-TimeComponent::TimeComponent(dae::GameObject* const parent,bool renderFPS)
+TimeComponent::TimeComponent(GameObject* const parent,bool renderFPS)
 	:BaseComponent(parent)
 	,m_RenderFPS(renderFPS)
 	,m_DeltaTime(0)

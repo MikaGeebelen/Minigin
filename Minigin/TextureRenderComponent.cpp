@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "ResourceManager.h"
-TextureRenderComponent::TextureRenderComponent(dae::GameObject* const parent, std::string texturePath)
+TextureRenderComponent::TextureRenderComponent(GameObject* const parent, std::string texturePath)
 	:BaseComponent(parent)
 	, m_pTexture(nullptr)
 {

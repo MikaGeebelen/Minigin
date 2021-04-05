@@ -4,7 +4,7 @@ class TextRenderComponent;
 class TimeComponent :public BaseComponent
 {
 public:
-	TimeComponent(dae::GameObject* const parent, bool renderFPS);
+	TimeComponent(GameObject* const parent, bool renderFPS);
 	~TimeComponent();
 	TimeComponent(const TimeComponent& other) = delete;
 	TimeComponent(TimeComponent&& other) = delete;

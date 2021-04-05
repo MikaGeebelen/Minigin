@@ -1,7 +1,7 @@
 #include "MiniginPCH.h"
 #include "InputManager.h"
 #include <iostream>
-bool dae::InputManager::ProcessInput()
+bool InputManager::ProcessInput()
 {
 	DWORD result;
 	
@@ -65,7 +65,7 @@ bool dae::InputManager::ProcessInput()
 	return true;
 }
 
-bool dae::InputManager::IsPressed(const std::string& buttonName)
+bool InputManager::IsPressed(const std::string& buttonName)
 {
 	if (!m_ConsoleCommands.at(buttonName).once && m_CurrentState.Gamepad.wButtons & m_ConsoleCommands.at(buttonName).bitmask)
 	{
@@ -79,12 +79,12 @@ bool dae::InputManager::IsPressed(const std::string& buttonName)
 	return false;
 }
 
-bool dae::InputManager::IsHeld(const std::string& buttonName)
+bool InputManager::IsHeld(const std::string& buttonName)
 {
 	return m_CurrentState.Gamepad.wButtons & m_ConsoleCommands.at(buttonName).bitmask;
 }
 
-bool dae::InputManager::IsReleased(const std::string& buttonName)
+bool InputManager::IsReleased(const std::string& buttonName)
 {
 	if (!m_ConsoleCommands.at(buttonName).once && m_CurrentState.Gamepad.wButtons & m_ConsoleCommands.at(buttonName).bitmask)
 	{
@@ -98,20 +98,20 @@ bool dae::InputManager::IsReleased(const std::string& buttonName)
 	return false;
 }
 
-void dae::InputManager::AddControllerCommand(unsigned int gamepadBitMask, std::string commandName, ActionType action, Command* command)
+void InputManager::AddControllerCommand(unsigned int gamepadBitMask, std::string commandName, ActionType action, Command* command)
 {
-	dae::InputInfo key(gamepadBitMask, action,command);
+	InputInfo key(gamepadBitMask, action,command);
 	m_ConsoleCommands[commandName] = key;
 }
 
-void dae::InputManager::AddKeyBoardCommand(std::string commandName, SDL_Scancode button, ActionType action, Command* command)
+void InputManager::AddKeyBoardCommand(std::string commandName, SDL_Scancode button, ActionType action, Command* command)
 {
-	dae::KeyBoardInputInfo key(button, action, command);
+	KeyBoardInputInfo key(button, action, command);
 	m_KeyBoardCommands[commandName] = key;
 	
 }
 
-dae::InputManager::~InputManager()
+InputManager::~InputManager()
 {
 	for (std::pair<std::string, KeyBoardInputInfo> pair : m_KeyBoardCommands)
 	{

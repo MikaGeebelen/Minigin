@@ -3,11 +3,11 @@
 #include "Font.h"
 #include "Texture2D.h"
 #include "Renderer.h"
-using namespace dae;
+
 class TextRenderComponent : public BaseComponent
 {
 public:
-	TextRenderComponent(dae::GameObject* const parent, std::string text, const std::shared_ptr<Font>& font);
+	TextRenderComponent(GameObject* const parent, std::string text, const std::shared_ptr<Font>& font);
 	~TextRenderComponent();
 	TextRenderComponent(const TextRenderComponent& other) = delete;
 	TextRenderComponent(TextRenderComponent&& other) = delete;

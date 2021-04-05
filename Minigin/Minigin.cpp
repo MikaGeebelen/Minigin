@@ -26,7 +26,7 @@
 using namespace std;
 using namespace std::chrono;
 
-void dae::Minigin::Initialize()
+void Minigin::Initialize()
 {
 	m_pSubject = new Subject();
 	
@@ -54,7 +54,7 @@ void dae::Minigin::Initialize()
 /**
  * Code constructing the scene world starts here
  */
-void dae::Minigin::LoadGame() const
+void Minigin::LoadGame() const
 {
 	ServiceLocater::RegisterSoundSystem(new SoundSystem());
 	ServiceLocater::GetSoundSystem().play("../Data/Diamond.wav",100);
@@ -130,7 +130,7 @@ void dae::Minigin::LoadGame() const
 	InputManager::GetInstance().AddKeyBoardCommand("Switch2", SDL_SCANCODE_F, ActionType::pressed, new SwitchToRegularSoundSystem());
 }
 
-void dae::Minigin::Cleanup()
+void Minigin::Cleanup()
 {
 	ServiceLocater::DestroySoundSystem();
 	delete m_pSubject;
@@ -141,7 +141,7 @@ void dae::Minigin::Cleanup()
 	SDL_Quit();
 }
 
-void dae::Minigin::Run()
+void Minigin::Run()
 {
 	Initialize();
 

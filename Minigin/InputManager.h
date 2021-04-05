@@ -10,75 +10,73 @@
 #include <string>
 #include "Singleton.h"
 #include <SDL.h>
-namespace dae
+
+enum class ActionType
 {
-	enum class ActionType
-	{
-		pressed,
-		held,
-		released
-	};
+	pressed,
+	held,
+	released
+};
+
+struct InputInfo
+{
+	InputInfo()
+		:bitmask(0)
+		, actionType(ActionType::pressed)
+		, command(nullptr)
+		, once(false)
+	{}
+	InputInfo(unsigned int mask, ActionType action, Command* command)
+		:bitmask(mask)
+		,actionType(action)
+		,command(command)
+		,once(false)
+	{}
 	
-	struct InputInfo
-	{
-		InputInfo()
-			:bitmask(0)
-			, actionType(ActionType::pressed)
-			, command(nullptr)
-			, once(false)
-		{}
-		InputInfo(unsigned int mask, ActionType action, Command* command)
-			:bitmask(mask)
-			,actionType(action)
-			,command(command)
-			,once(false)
-		{}
-		
-		unsigned int bitmask;
-		ActionType actionType;
-		bool once;
-		Command* command;
-	};
+	unsigned int bitmask;
+	ActionType actionType;
+	bool once;
+	Command* command;
+};
 
-	struct KeyBoardInputInfo
-	{
-		KeyBoardInputInfo()
-			:Button()
-			, actionType(ActionType::pressed)
-			, command(command)
-		{}
-		KeyBoardInputInfo(SDL_Scancode button, ActionType action, Command* command)
-			:Button(button)
-			, actionType(action)
-			, command(command)
-		{}
+struct KeyBoardInputInfo
+{
+	KeyBoardInputInfo()
+		:Button()
+		, actionType(ActionType::pressed)
+		, command(command)
+	{}
+	KeyBoardInputInfo(SDL_Scancode button, ActionType action, Command* command)
+		:Button(button)
+		, actionType(action)
+		, command(command)
+	{}
 
-		SDL_Scancode Button;
-		ActionType actionType;
-		Command* command;
-	};
+	SDL_Scancode Button;
+	ActionType actionType;
+	Command* command;
+};
+
+class InputManager final : public Singleton<InputManager>
+{
+public:
+	bool ProcessInput();
+
+	void AddControllerCommand(unsigned int gamepadBitMask, std::string commandName, ActionType action, Command* command);
+	void AddKeyBoardCommand(std::string commandName, SDL_Scancode button, ActionType action, Command* command);
+	~InputManager();
+
+private:
+	bool IsPressed(const std::string& buttonName);
+	bool IsHeld(const std::string& buttonName);
+	bool IsReleased(const std::string& buttonName);
 	
-	class InputManager final : public Singleton<InputManager>
-	{
-	public:
-		bool ProcessInput();
+	using ControllerCommandsMap = std::map< std::string, InputInfo>;
+	ControllerCommandsMap m_ConsoleCommands;
 
-		void AddControllerCommand(unsigned int gamepadBitMask, std::string commandName, ActionType action, Command* command);
-		void AddKeyBoardCommand(std::string commandName, SDL_Scancode button, ActionType action, Command* command);
-		~InputManager();
+	using KeyBoardCommandsMap = std::map< std::string, KeyBoardInputInfo>;
+	KeyBoardCommandsMap m_KeyBoardCommands;
+
+	XINPUT_STATE m_CurrentState;
 	
-	private:
-		bool IsPressed(const std::string& buttonName);
-		bool IsHeld(const std::string& buttonName);
-		bool IsReleased(const std::string& buttonName);
-		
-		using ControllerCommandsMap = std::map< std::string, InputInfo>;
-		ControllerCommandsMap m_ConsoleCommands;
-
-		using KeyBoardCommandsMap = std::map< std::string, KeyBoardInputInfo>;
-		KeyBoardCommandsMap m_KeyBoardCommands;
-
-		XINPUT_STATE m_CurrentState;
-		
-	};
-}
+};
