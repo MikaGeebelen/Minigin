@@ -12,7 +12,7 @@
 namespace dae
 {
 	class Texture2D;
-	class GameObject final: public SceneObject 
+	class GameObject final
 	{
 	public:
 		GameObject() = default;
@@ -22,8 +22,8 @@ namespace dae
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
-		void Update(const float& deltaTime) override final;
-		void Render() const override final;
+		virtual void Update(const float& deltaTime) final;
+		virtual void Render() const final;
 
 		template<class component> void AddComponent(component* comp);
 		template<class component> component* GetComponent();
