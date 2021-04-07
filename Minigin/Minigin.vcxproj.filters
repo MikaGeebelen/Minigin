@@ -40,6 +40,9 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{34f76141-a4f5-468c-9ea7-27b0d02d02bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Helper">
+      <UniqueIdentifier>{63fd9bb6-465b-4edf-8cb7-11ef5f28ee68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -132,14 +135,14 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Source Files\Textures</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton.h">
-      <Filter>Source Files\Minigin</Filter>
+      <Filter>Source Files\Helper</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>Source Files\Minigin</Filter>
+      <Filter>Source Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Source Files\Helper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,14 +233,14 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files\Textures</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files\Minigin</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files\Minigin</Filter>
+      <Filter>Source Files\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Helper</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

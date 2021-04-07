@@ -3,7 +3,7 @@
 
 int main()
 {
-	Minigin engine;
+	Minigin engine;	
 	engine.Run();
 	return 0;
 }

@@ -7,7 +7,7 @@ class SceneManager final : public Singleton<SceneManager>
 {
 public:
 	Scene& CreateScene(const std::string& name);
-
+	void LoadScene(const std::string& filePath);
 	void Update(const float& deltaTime);
 	void Render();
 private:

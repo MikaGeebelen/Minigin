@@ -54,7 +54,7 @@ template <class component>
 std::vector<component*> GameObject::GetComponents()
 {
 	std::vector<component*> components{};
-	for (int i = 0; i < m_Components.size(); i++)
+	for (size_t i = 0; i < m_Components.size(); i++)
 	{
 		component* pComponent = dynamic_cast<component*>(m_Components[i]);
 		if (pComponent != nullptr)
