@@ -3,11 +3,32 @@
 #include "ServiceLocater.h"
 #include "SubjectComponent.h"
 #include "Observer.h"
+
+class TextureRenderComponent;
+class Texture2D;
+
 class Command
 {
 public:
 	virtual ~Command() = default;
 	virtual void Execute() = 0;
+};
+
+class CycleThroughMenu : public Command
+{
+public:
+	CycleThroughMenu(TextureRenderComponent* menu,std::vector<std::shared_ptr<Texture2D>> menuPictures,bool cycleDir = true)
+	:m_Pictures(menuPictures)
+	,m_CyclesUp(cycleDir)
+	, m_pMenu(menu)
+	{}
+	void Execute() override;
+
+private:
+	TextureRenderComponent* m_pMenu;
+	size_t m_CurrentPicture = 0;
+	std::vector<std::shared_ptr<Texture2D>> m_Pictures;
+	bool m_CyclesUp;
 };
 
 class Die : public Command

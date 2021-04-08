@@ -1,10 +1,10 @@
+#include "QbertApplication.h"
 
-#include <Minigin.h>
-
-int main()
+int main(int, char* [])
 {
-	Minigin engine;	
+	QbertApplication engine;
 	engine.Run();
+
 	return 0;
 }
 

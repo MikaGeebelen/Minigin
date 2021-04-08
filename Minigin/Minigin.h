@@ -9,6 +9,9 @@ public:
 	void Initialize();
 	void LoadGame() const;
 	void Cleanup();
+	virtual void UserInitialize() = 0;
+	virtual void UserLoadGame() const = 0;
+	virtual void UserCleanup() = 0;
 	void Run();
 private:
 	static const int MsPerFrame = 16; //16 for 60 fps, 33 for 30 fps
