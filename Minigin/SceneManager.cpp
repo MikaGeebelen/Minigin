@@ -7,7 +7,10 @@ void SceneManager::Update(const float& deltaTime)
 {
 	for(auto& scene : m_Scenes)
 	{
-		scene->Update(deltaTime);
+		if (scene->GetIsSceneActive())
+		{
+			scene->Update(deltaTime);
+		}
 	}
 }
 
@@ -15,7 +18,10 @@ void SceneManager::Render()
 {
 	for (const auto& scene : m_Scenes)
 	{
-		scene->Render();
+		if (scene->GetIsSceneActive())
+		{
+			scene->Render();
+		}
 	}
 }
 

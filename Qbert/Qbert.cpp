@@ -1,11 +1,10 @@
-#include "QbertApplication.h"
+#include "Qbert.h"
 
-int main(int, char* [])
+void Qbert::Start()
 {
-	QbertApplication engine;
-	engine.Run();
-
-	return 0;
+	
 }
 
-
+void Qbert::Update(const float& )
+{
+}

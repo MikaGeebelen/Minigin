@@ -5,7 +5,7 @@
 
 unsigned int Scene::m_IdCounter = 0;
 
-Scene::Scene(const std::string& name) : m_Name(name) {}
+Scene::Scene(const std::string& name) : m_Name(name),m_IsSceneActive(false) {}
 
 Scene::~Scene() = default;
 
@@ -28,5 +28,15 @@ void Scene::Render() const
 	{
 		object->Render();
 	}
+}
+
+void Scene::SetIsSceneActive(bool isSceneActive)
+{
+	m_IsSceneActive = isSceneActive;
+}
+
+bool Scene::GetIsSceneActive()
+{
+	return  m_IsSceneActive;
 }
 

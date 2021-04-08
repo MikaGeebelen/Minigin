@@ -13,9 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\GameComponents">
+      <UniqueIdentifier>{0a8b6a50-1fd8-4c83-9fd6-dc9206195e63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Qbert.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QbertSceneLoader.cpp">
@@ -24,6 +27,9 @@
     <ClCompile Include="QbertApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Qbert.cpp">
+      <Filter>Source Files\GameComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QbertSceneLoader.h">
@@ -31,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="QbertApplication.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Qbert.h">
+      <Filter>Source Files\GameComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

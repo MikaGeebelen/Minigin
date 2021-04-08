@@ -187,11 +187,13 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Qbert.cpp" />
     <ClCompile Include="QbertApplication.cpp" />
     <ClCompile Include="QbertSceneLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Qbert.h" />
     <ClInclude Include="QbertApplication.h" />
     <ClInclude Include="QbertSceneLoader.h" />
   </ItemGroup>
