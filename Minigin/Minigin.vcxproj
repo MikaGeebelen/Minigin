@@ -231,6 +231,7 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\Lua.dll" "$(OutputPath)" /R 
     <ClInclude Include="..\3rdParty\Imgui-1.81\imgui-master\imstb_truetype.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="Command.h" />
+    <ClInclude Include="Components.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputManager.h" />

@@ -150,6 +150,9 @@
     <ClInclude Include="Script.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Components.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">

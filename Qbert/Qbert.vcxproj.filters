@@ -30,6 +30,9 @@
     <ClCompile Include="Qbert.cpp">
       <Filter>Source Files\GameComponents</Filter>
     </ClCompile>
+    <ClCompile Include="HexGrid.cpp">
+      <Filter>Source Files\GameComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QbertSceneLoader.h">
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Qbert.h">
+      <Filter>Source Files\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="HexGrid.h">
       <Filter>Source Files\GameComponents</Filter>
     </ClInclude>
   </ItemGroup>
