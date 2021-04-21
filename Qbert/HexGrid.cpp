@@ -11,7 +11,7 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 {
 	m_pPlayfield = std::make_shared<GameObject>();
 	m_pPlayfield->AddComponent(new TransformComponent(m_pPlayfield.get(), &position));
-
+	//m_pPlayfield->AddComponent(new ObserverComponent(m_pPlayfield,))
 
 	int offset = (height-1) * 2 + 1;
 	for (int i = 1; i < height; i++)
@@ -46,7 +46,7 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 			Transform temp{};
 
 			temp.SetPosition(position.GetPosition().x + (y * tempWidth) - pyramidWidthOffset,
-							 position.GetPosition().y - (x * tempHeight * 0.75f),
+							 position.GetPosition().y + (x * tempHeight * 0.75f),
 							 position.GetPosition().z);
 			m_TilePositions.push_back(temp);
 		}
@@ -64,18 +64,27 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 	}
 }
 
-Transform HexGrid::GetGridPosition(int , int )
+Transform HexGrid::GetGridPosition(int x, int y)
 {
-	return Transform();
+
+	int offset = x * 2;
+	for (int i{ 1 }; i < x; i++)
+	{
+		offset += (x - i);
+	}
+
+	int index = offset - y;
+	
+	return m_TilePositions[index];
 }
 
 void HexGrid::QbertTouch(int x, int y)
 {
 	//	 index layout
 	//	    [y,x]
-	//	  [-1,1][0,1] 
-	//	[-2,2][-1,2][0,2] 
-	//[-3,3][-2,3][-1,3][0,3]
+	//	  [1,1][0,1] 
+	//	[2,2][1,2][0,2] 
+	//[3,3][2,3][1,3][0,3]
 
 
 	int offset = x * 2;

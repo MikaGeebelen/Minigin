@@ -16,6 +16,9 @@
     <Filter Include="Source Files\GameComponents">
       <UniqueIdentifier>{0a8b6a50-1fd8-4c83-9fd6-dc9206195e63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObservers">
+      <UniqueIdentifier>{502cfffe-2041-45da-929a-7e22b6e63eeb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -33,6 +36,9 @@
     <ClCompile Include="HexGrid.cpp">
       <Filter>Source Files\GameComponents</Filter>
     </ClCompile>
+    <ClCompile Include="QbertPos.cpp">
+      <Filter>Source Files\GameObservers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QbertSceneLoader.h">
@@ -46,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="HexGrid.h">
       <Filter>Source Files\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="QbertPos.h">
+      <Filter>Source Files\GameObservers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

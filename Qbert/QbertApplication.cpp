@@ -26,7 +26,7 @@
 
 //game
 #include "HexGrid.h"
-
+#include "Qbert.h"
 void QbertApplication::UserInitialize()
 {
 }
@@ -54,10 +54,10 @@ void QbertApplication::UserLoadGame() const
 
 	//auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
 
-	//auto go = std::make_shared<GameObject>();
-	//go->AddComponent(new TransformComponent(go.get(),0.f, 0.f, 0.f));
-	//go->AddComponent(new TextureRenderComponent(go.get(), "background.jpg"));
-	//scene.Add(go);
+	auto go = std::make_shared<GameObject>();
+	go->AddComponent(new TransformComponent(go.get(),0.f, 0.f, 0.f));
+	go->AddComponent(new TextureRenderComponent(go.get(), "background.jpg"));
+	scene.Add(go);
 
 	//go = std::make_shared<GameObject>();
 	//go->AddComponent(new TransformComponent(go.get(), 216.f, 180.f, 0.f));
@@ -135,16 +135,21 @@ void QbertApplication::UserLoadGame() const
 	//InputManager::GetInstance().AddKeyBoardCommand("OSound", SDL_SCANCODE_D, ActionType::pressed, new OuchSound());
 	//InputManager::GetInstance().AddKeyBoardCommand("Switch1", SDL_SCANCODE_R, ActionType::pressed, new SwitchToLogSoundSystem());
 	//InputManager::GetInstance().AddKeyBoardCommand("Switch2", SDL_SCANCODE_F, ActionType::pressed, new SwitchToRegularSoundSystem());
+	
 	Transform temp{};
-	temp.SetPosition(250, 100, 0);
-	HexGrid grid(temp, 10.f, 5, 2, { "../Data/Tiles/CubeOrange.png","../Data/Tiles/CubePurple.png" });
+	temp.SetPosition(300, 100, 0);
+	HexGrid* pGrid = new HexGrid(temp, 25.f, 5, 2, { "../Data/Tiles/CubeOrange.png","../Data/Tiles/CubePurple.png" });
 
-	for(std::shared_ptr<GameObject> object: grid.GetGameObjects())
+	for(std::shared_ptr<GameObject> object: pGrid->GetGameObjects())
 	{
 		scene.Add(object);
 	}
+
+	Qbert* pQbert = new Qbert(0, 0, "../Data/Qbert.png", pGrid);
+
+	scene.Add(pQbert->GetGameObject());
 	
-	
+	scene.SetIsSceneActive(true);
 }
 
 void QbertApplication::UserCleanup()
