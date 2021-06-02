@@ -10,6 +10,8 @@ class Transform final
 public:
 	const glm::vec3& GetPosition() const { return m_Position; }
 	void SetPosition(float x, float y, float z);
+
+	bool IsNearlyEqual(const Transform& otherTransform, float accuracy = 0.1f) const;
 private:
 	glm::vec3 m_Position;
 };

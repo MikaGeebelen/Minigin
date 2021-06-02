@@ -13,11 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\GameComponents">
-      <UniqueIdentifier>{0a8b6a50-1fd8-4c83-9fd6-dc9206195e63}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GameObservers">
       <UniqueIdentifier>{502cfffe-2041-45da-929a-7e22b6e63eeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GamePrefabs">
+      <UniqueIdentifier>{0a8b6a50-1fd8-4c83-9fd6-dc9206195e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameComponents">
+      <UniqueIdentifier>{add06584-611e-4564-aea4-9314075a3f7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameComponents\MoveRules">
+      <UniqueIdentifier>{89caa98d-f4f3-4e0a-a71f-61eddf2bda66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -31,13 +37,25 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Qbert.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+      <Filter>Source Files\GamePrefabs</Filter>
     </ClCompile>
     <ClCompile Include="HexGrid.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+      <Filter>Source Files\GamePrefabs</Filter>
     </ClCompile>
     <ClCompile Include="QbertPos.cpp">
       <Filter>Source Files\GameObservers</Filter>
+    </ClCompile>
+    <ClCompile Include="GridMoveComponent.cpp">
+      <Filter>Source Files\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Move.cpp">
+      <Filter>Source Files\GameComponents\MoveRules</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMove.cpp">
+      <Filter>Source Files\GameComponents\MoveRules</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Source Files\GameComponents\MoveRules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -48,13 +66,25 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Qbert.h">
-      <Filter>Source Files\GameComponents</Filter>
+      <Filter>Source Files\GamePrefabs</Filter>
     </ClInclude>
     <ClInclude Include="HexGrid.h">
-      <Filter>Source Files\GameComponents</Filter>
+      <Filter>Source Files\GamePrefabs</Filter>
     </ClInclude>
     <ClInclude Include="QbertPos.h">
       <Filter>Source Files\GameObservers</Filter>
+    </ClInclude>
+    <ClInclude Include="GridMoveComponent.h">
+      <Filter>Source Files\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Move.h">
+      <Filter>Source Files\GameComponents\MoveRules</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMove.h">
+      <Filter>Source Files\GameComponents\MoveRules</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Source Files\GameComponents\MoveRules</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

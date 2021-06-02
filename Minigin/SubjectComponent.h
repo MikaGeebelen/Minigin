@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "BaseComponent.h"
 #include "Observer.h"
+#include "vector"
 class ObserverComponent;
 class SubjectComponent : public BaseComponent
 {

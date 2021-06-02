@@ -3,6 +3,8 @@
 #include <memory>
 #include <Components.h>
 
+#include "ResourceManager.h"
+
 HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std::vector<std::string> images, bool cycles)
 	:m_Height(height)
 	,m_Size(tileSize)
@@ -13,6 +15,12 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 	m_pPlayfield->AddComponent(new TransformComponent(m_pPlayfield.get(), &position));
 	//m_pPlayfield->AddComponent(new ObserverComponent(m_pPlayfield,))
 
+	for (const std::string& path : images)
+	{
+		m_Textures.push_back(ResourceManager::GetInstance().LoadTexture(path));
+	}
+
+	
 	int offset = (height-1) * 2 + 1;
 	for (int i = 1; i < height; i++)
 	{

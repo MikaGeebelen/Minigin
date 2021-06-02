@@ -138,7 +138,7 @@ void QbertApplication::UserLoadGame() const
 	
 	Transform temp{};
 	temp.SetPosition(300, 100, 0);
-	HexGrid* pGrid = new HexGrid(temp, 25.f, 5, 2, { "../Data/Tiles/CubeOrange.png","../Data/Tiles/CubePurple.png" });
+	HexGrid* pGrid = new HexGrid(temp, 25.f, 7, 2, { "../Data/Tiles/CubeOrange.png","../Data/Tiles/CubePurple.png" });
 
 	for(std::shared_ptr<GameObject> object: pGrid->GetGameObjects())
 	{

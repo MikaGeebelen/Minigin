@@ -187,15 +187,23 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GridMoveComponent.cpp" />
     <ClCompile Include="HexGrid.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Move.cpp" />
+    <ClCompile Include="MoveCommand.cpp" />
+    <ClCompile Include="PlayerMove.cpp" />
     <ClCompile Include="Qbert.cpp" />
     <ClCompile Include="QbertApplication.cpp" />
     <ClCompile Include="QbertPos.cpp" />
     <ClCompile Include="QbertSceneLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GridMoveComponent.h" />
     <ClInclude Include="HexGrid.h" />
+    <ClInclude Include="Move.h" />
+    <ClInclude Include="MoveCommand.h" />
+    <ClInclude Include="PlayerMove.h" />
     <ClInclude Include="Qbert.h" />
     <ClInclude Include="QbertApplication.h" />
     <ClInclude Include="QbertPos.h" />
