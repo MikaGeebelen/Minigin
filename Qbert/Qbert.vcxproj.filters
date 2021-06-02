@@ -57,6 +57,9 @@
     <ClCompile Include="MoveCommand.cpp">
       <Filter>Source Files\GameComponents\MoveRules</Filter>
     </ClCompile>
+    <ClCompile Include="FallDownMove.cpp">
+      <Filter>Source Files\GameComponents\MoveRules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QbertSceneLoader.h">
@@ -84,6 +87,9 @@
       <Filter>Source Files\GameComponents\MoveRules</Filter>
     </ClInclude>
     <ClInclude Include="MoveCommand.h">
+      <Filter>Source Files\GameComponents\MoveRules</Filter>
+    </ClInclude>
+    <ClInclude Include="FallDownMove.h">
       <Filter>Source Files\GameComponents\MoveRules</Filter>
     </ClInclude>
   </ItemGroup>

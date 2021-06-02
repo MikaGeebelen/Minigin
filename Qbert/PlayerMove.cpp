@@ -3,31 +3,39 @@
 #include "MoveCommand.h"
 #include "HexGrid.h"
 
-#pragma warning(push)
-#pragma warning (disable:4201)
-#include "glm/gtx/compatibility.hpp"
-#pragma warning(pop)
 
-PlayerMove::PlayerMove(const std::string& playerPrefix, HexGrid* pCurrentGrid)
-	:m_IsMoving(false)
+PlayerMove::PlayerMove(int playerNum, HexGrid* pCurrentGrid, int x, int y)
+	:Move(x,y)
 	,m_ActiveMoveCommand(0)
-	,m_MaxMoveTime(0.5f)
-	,m_MoveTime(0.f)
 {
-	m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LUP));
-	InputManager::GetInstance().AddKeyBoardCommand(playerPrefix + "LUP", SDL_SCANCODE_Q, ActionType::pressed, m_MoveCommands[m_MoveCommands.size()-1]);
-	m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RUP));
-	InputManager::GetInstance().AddKeyBoardCommand(playerPrefix + "RUP", SDL_SCANCODE_E, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
-	m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LDOWN));
-	InputManager::GetInstance().AddKeyBoardCommand(playerPrefix + "LDOWN", SDL_SCANCODE_A, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
-	m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RDOWN));
-	InputManager::GetInstance().AddKeyBoardCommand(playerPrefix + "RDOWN", SDL_SCANCODE_D, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+	if (playerNum == 1)
+	{
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LUP, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddKeyBoardCommand("1LUP", SDL_SCANCODE_Q, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RUP, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddKeyBoardCommand("1RUP", SDL_SCANCODE_E, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LDOWN, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddKeyBoardCommand("1LDOWN", SDL_SCANCODE_Z, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RDOWN, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddKeyBoardCommand("RDOWN", SDL_SCANCODE_C, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+	}
+	else if (playerNum ==2)
+	{
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LUP, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddKeyBoardCommand("2LUP", SDL_SCANCODE_7, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RUP, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddKeyBoardCommand("2RUP", SDL_SCANCODE_9, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LDOWN, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddKeyBoardCommand("2LDOWN", SDL_SCANCODE_1, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RDOWN, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddKeyBoardCommand("2RDOWN", SDL_SCANCODE_3, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+	}
+
 }
 
 
 Transform PlayerMove::UpdateMove(const float& deltaTime)
 {
-	//inputs defined for player
 	for (int i{};i<m_MoveCommands.size();i++)
 	{
 		if (!m_MoveCommands[i]->GetCurrentLoc().IsNearlyEqual(m_MoveCommands[i]->GetNextLoc()))
@@ -45,16 +53,18 @@ Transform PlayerMove::UpdateMove(const float& deltaTime)
 	else
 	{
 		m_MoveTime += deltaTime;
-		return LerpPos();
+
+		Transform temp = LerpPos(m_MoveCommands[m_ActiveMoveCommand]->GetCurrentLoc().GetPosition(), m_MoveCommands[m_ActiveMoveCommand]->GetNextLoc().GetPosition());
+		if (!m_IsMoving)
+		{
+			ResetCommands(m_MoveCommands[m_ActiveMoveCommand]->GetNextLoc());
+			SetMovementActive(true);
+		}
+		
+		return temp;
 	}
 	
 }
-
-glm::ivec2 PlayerMove::GetGridPos()
-{
-	return m_GridPos;
-}
-
 
 void PlayerMove::SetMovementActive(bool enable)
 {
@@ -74,30 +84,6 @@ void PlayerMove::ResetCommands(Transform newPos)
 	}
 }
 
-Transform PlayerMove::LerpPos()
-{
-	glm::vec3 currentLoc = m_MoveCommands[m_ActiveMoveCommand]->GetCurrentLoc().GetPosition();
-	glm::vec3 nextLoc = m_MoveCommands[m_ActiveMoveCommand]->GetNextLoc().GetPosition();
-
-	Transform newPos{};
-	
-	float newX = glm::lerp(currentLoc.x, nextLoc.x, m_MoveTime / m_MaxMoveTime);
-	float newY = glm::lerp(currentLoc.y, nextLoc.y, m_MoveTime / m_MaxMoveTime);
-	float newZ = glm::lerp(currentLoc.z, nextLoc.z, m_MoveTime / m_MaxMoveTime);
-
-	newPos.SetPosition(newX, newY, newZ);
-	
-	if (m_MoveCommands[m_ActiveMoveCommand]->GetNextLoc().IsNearlyEqual(newPos))
-	{
-		m_MoveTime = 0;
-		m_IsMoving = false;
-		ResetCommands(m_MoveCommands[m_ActiveMoveCommand]->GetNextLoc());
-		SetMovementActive(true);
-		
-	}
-
-	return newPos;
-}
 
 
 

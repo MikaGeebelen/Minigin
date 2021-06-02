@@ -10,7 +10,6 @@ GridMoveComponent::GridMoveComponent(GameObject* const parent, HexGrid* pGrid, M
 	,m_X(x)
 	,m_Y(y)
 {
-	*m_pPosition = m_pObjectGrid->GetGridPosition(m_X, m_Y);
 }
 
 void GridMoveComponent::Render()
@@ -25,7 +24,7 @@ void GridMoveComponent::Update(const float& deltaTime)
 	{
 		m_X = pos.x;
 		m_Y = pos.y;
-		m_pObjectGrid->QbertTouch(pos.x, pos.y);
+		m_pObjectGrid->TouchTile(pos.x, pos.y);
 	}
 }
 

@@ -74,7 +74,11 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 
 Transform HexGrid::GetGridPosition(int x, int y)
 {
-
+	if (x >= m_Height || y > x || y < 0 || x < 0)
+	{
+		return m_TilePositions[0];
+	}
+	
 	int offset = x * 2;
 	for (int i{ 1 }; i < x; i++)
 	{
@@ -86,15 +90,20 @@ Transform HexGrid::GetGridPosition(int x, int y)
 	return m_TilePositions[index];
 }
 
-void HexGrid::QbertTouch(int x, int y)
+void HexGrid::TouchTile(int x, int y, bool evil)
 {
 	//	 index layout
-	//	    [y,x]
-	//	  [1,1][0,1] 
-	//	[2,2][1,2][0,2] 
-	//[3,3][2,3][1,3][0,3]
+	//	        [y,x]
+	//	     [1,1][0,1] 
+	//    [2,2][1,2][0,2]
+	//	[3,3][2,3][1,3][0,3]
 
-
+	if (x >= m_Height || y > x || y < 0 || x < 0)
+	{
+		SwapPicture(0, evil);
+		return;
+	}
+	
 	int offset = x * 2;
 	for (int i {1}; i < x; i++)
 	{
@@ -102,7 +111,7 @@ void HexGrid::QbertTouch(int x, int y)
 	}
 
 	int index = offset - y;
-	SwapPicture(index);
+	SwapPicture(index, evil);
 }
 
 std::vector<std::shared_ptr<GameObject>> HexGrid::GetGameObjects()
@@ -116,9 +125,23 @@ std::vector<std::shared_ptr<GameObject>> HexGrid::GetGameObjects()
 	return m_GameObjects;
 }
 
-void HexGrid::SwapPicture(int index)
+void HexGrid::SwapPicture(int index, bool evil)
 {
-	if (m_BoardTiles[index].CurrentTextureNumber + 1 >= m_Textures.size())
+	if (evil)
+	{
+		if (m_BoardTiles[index].CurrentTextureNumber - 1 > 0)
+		{
+			m_BoardTiles[index].CurrentTextureNumber--;
+		}
+		else
+		{
+			if (m_Cycles)
+			{
+				m_BoardTiles[index].CurrentTextureNumber = (int)m_Textures.size() - 1;
+			}
+		}
+	}
+	else if (m_BoardTiles[index].CurrentTextureNumber + 1 >= m_Textures.size())
 	{
 		if (m_Cycles)
 		{

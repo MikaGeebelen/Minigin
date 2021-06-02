@@ -7,7 +7,7 @@ class GameObject;
 class Qbert
 {
 public:
-	Qbert(int gridX,int gridY, std::string image ,HexGrid* playfield);
+	Qbert(int playerNum, int gridX,int gridY, std::string image ,HexGrid* playfield);
 	
 	std::shared_ptr<GameObject> GetGameObject();
 
