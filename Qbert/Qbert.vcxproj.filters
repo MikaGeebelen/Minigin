@@ -30,9 +30,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QbertSceneLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="QbertApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -60,11 +57,14 @@
     <ClCompile Include="FallDownMove.cpp">
       <Filter>Source Files\GameComponents\MoveRules</Filter>
     </ClCompile>
+    <ClCompile Include="Coily.cpp">
+      <Filter>Source Files\GamePrefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="GridManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="QbertSceneLoader.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="QbertApplication.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -91,6 +91,12 @@
     </ClInclude>
     <ClInclude Include="FallDownMove.h">
       <Filter>Source Files\GameComponents\MoveRules</Filter>
+    </ClInclude>
+    <ClInclude Include="Coily.h">
+      <Filter>Source Files\GamePrefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="GridManager.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

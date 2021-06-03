@@ -15,6 +15,8 @@ public:
 
 	void SetIsSceneActive(bool isSceneActive);
 	bool GetIsSceneActive();
+
+	const std::string& GetSceneName();
 	
 	~Scene();
 	Scene(const Scene& other) = delete;

@@ -144,12 +144,6 @@
     <ClInclude Include="Transform.h">
       <Filter>Source Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="ScriptComponent.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Script.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Components.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
@@ -250,12 +244,6 @@
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files\Helper</Filter>
-    </ClCompile>
-    <ClCompile Include="ScriptComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Script.cpp">
-      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

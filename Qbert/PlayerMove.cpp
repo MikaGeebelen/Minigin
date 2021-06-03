@@ -7,6 +7,7 @@
 PlayerMove::PlayerMove(int playerNum, HexGrid* pCurrentGrid, int x, int y)
 	:Move(x,y)
 	,m_ActiveMoveCommand(0)
+	,m_pGrid(pCurrentGrid)
 {
 	if (playerNum == 1)
 	{
@@ -40,9 +41,12 @@ Transform PlayerMove::UpdateMove(const float& deltaTime)
 	{
 		if (!m_MoveCommands[i]->GetCurrentLoc().IsNearlyEqual(m_MoveCommands[i]->GetNextLoc()))
 		{
-			m_ActiveMoveCommand = i;
-			SetMovementActive(false);
-			m_IsMoving = true;
+			if (!m_MoveCommands[i]->GetNextLoc().IsNearlyEqual(Transform()))
+			{
+				m_ActiveMoveCommand = i;
+				SetMovementActive(false);
+				m_IsMoving = true;
+			}
 		}
 	}
 	
@@ -77,6 +81,13 @@ void PlayerMove::SetMovementActive(bool enable)
 void PlayerMove::ResetCommands(Transform newPos)
 {
 	m_GridPos = m_MoveCommands[m_ActiveMoveCommand]->GetCoords();
+	
+	if (m_GridPos.y > m_GridPos.x || m_GridPos.y < 0)
+	{
+		m_GridPos = { 0,0 };
+	}
+
+	
 	for (MoveCommand* pCommand : m_MoveCommands)
 	{
 		pCommand->ResetLoc(newPos);

@@ -15,6 +15,7 @@ protected:
 	const float m_MaxMoveTime = 0.5f;
 	float m_MoveTime = 0.f;
 	bool m_IsMoving = false;
+	bool m_CanMove = true;
 
 	glm::ivec2 m_GridPos;
 	

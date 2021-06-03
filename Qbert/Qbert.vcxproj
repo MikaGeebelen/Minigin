@@ -187,7 +187,9 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Coily.cpp" />
     <ClCompile Include="FallDownMove.cpp" />
+    <ClCompile Include="GridManager.cpp" />
     <ClCompile Include="GridMoveComponent.cpp" />
     <ClCompile Include="HexGrid.cpp" />
     <ClCompile Include="main.cpp" />
@@ -197,10 +199,11 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     <ClCompile Include="Qbert.cpp" />
     <ClCompile Include="QbertApplication.cpp" />
     <ClCompile Include="QbertPos.cpp" />
-    <ClCompile Include="QbertSceneLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Coily.h" />
     <ClInclude Include="FallDownMove.h" />
+    <ClInclude Include="GridManager.h" />
     <ClInclude Include="GridMoveComponent.h" />
     <ClInclude Include="HexGrid.h" />
     <ClInclude Include="Move.h" />
@@ -209,7 +212,6 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     <ClInclude Include="Qbert.h" />
     <ClInclude Include="QbertApplication.h" />
     <ClInclude Include="QbertPos.h" />
-    <ClInclude Include="QbertSceneLoader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

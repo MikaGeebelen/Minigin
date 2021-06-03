@@ -40,3 +40,8 @@ bool Scene::GetIsSceneActive()
 	return  m_IsSceneActive;
 }
 
+const std::string& Scene::GetSceneName()
+{
+	return m_Name;
+}
+

@@ -15,6 +15,7 @@ public:
 
 private:
 	std::vector<MoveCommand*> m_MoveCommands;
+	HexGrid* m_pGrid;
 	int m_ActiveMoveCommand;
 
 	void SetMovementActive(bool enable);

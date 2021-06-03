@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include <memory>
-class Transform;
+#include <Transform.h>
 class GameObject;
 class TextureRenderComponent;
 class Texture2D;
@@ -12,6 +12,8 @@ public:
 	HexGrid(Transform position, float tileSize ,int height, int states,std::vector<std::string> images, bool cycles = false);
 	Transform GetGridPosition(int x, int y);
 	void TouchTile(int x, int y, bool evil = false);
+
+	std::shared_ptr<GameObject> SpawnDiskTile();
 	
 	std::vector<std::shared_ptr<GameObject>> GetGameObjects();
 	
@@ -20,6 +22,15 @@ public:
 		std::shared_ptr<GameObject> pTile;
 		TextureRenderComponent* pTextureRenderer;
 		int CurrentTextureNumber;
+	};
+
+	struct Disk
+	{
+		Disk(int x, int y, float tileSize, Transform gridClose);
+		std::shared_ptr<GameObject> pDisk;
+		int x;
+		int y;
+		Transform location;
 	};
 
 private:
@@ -38,6 +49,6 @@ private:
 	std::vector<std::shared_ptr<Texture2D>> m_Textures;
 
 	std::vector<Transform> m_TilePositions;
-
+	std::vector<Disk*> m_Disks;
 	
 };

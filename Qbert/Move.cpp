@@ -28,7 +28,7 @@ Transform Move::LerpPos(glm::vec3 current, glm::vec3 next)
 
 	newPos.SetPosition(newX, newY, newZ);
 
-	if (nextPos.IsNearlyEqual(newPos))
+	if (m_MoveTime > m_MaxMoveTime)
 	{
 		m_MoveTime = 0;
 		m_IsMoving = false;

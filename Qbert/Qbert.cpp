@@ -16,7 +16,7 @@ Qbert::Qbert(int playerNum,int gridX, int gridY, std::string image, HexGrid* pla
 	m_pQbert->AddComponent(new TransformComponent(m_pQbert.get(),&m_Transform));
 	m_pQbert->AddComponent(new TextureRenderComponent(m_pQbert.get(), image));
 	m_pQbert->AddComponent(new SubjectComponent(m_pQbert.get()));
-	m_pQbert->AddComponent(new GridMoveComponent(m_pQbert.get(), playfield, new PlayerMove(playerNum,playfield, gridX, gridY),&m_Transform,gridX,gridY));
+	m_pQbert->AddComponent(new GridMoveComponent(m_pQbert.get(), playfield, new PlayerMove(playerNum,playfield, gridX, gridY),&m_Transform,gridX,gridY,true,true));
 }
 
 std::shared_ptr<GameObject> Qbert::GetGameObject()

@@ -5,11 +5,22 @@
 
 
 class Scene;
+struct lua_State;
 class SceneManager final : public Singleton<SceneManager>
 {
 public:
-	Scene& CreateScene(const std::string& name);
 
+	struct LuaFunctions
+	{
+		std::string name;
+		int(*func)(lua_State*);
+	};
+	
+	Scene& CreateScene(const std::string& name);
+	void CreateScene(const std::string& path, std::vector<LuaFunctions> generatorFunctions);
+
+	std::shared_ptr<Scene> GetScene(const std::string& name);
+	
 	void Update(const float& deltaTime);
 	void Render();
 private:

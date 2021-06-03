@@ -10,10 +10,10 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 	,m_Size(tileSize)
 	,m_States(states)
 	,m_Cycles(cycles)
+	,m_Disks()
 {
 	m_pPlayfield = std::make_shared<GameObject>();
 	m_pPlayfield->AddComponent(new TransformComponent(m_pPlayfield.get(), &position));
-	//m_pPlayfield->AddComponent(new ObserverComponent(m_pPlayfield,))
 
 	for (const std::string& path : images)
 	{
@@ -59,6 +59,7 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 			m_TilePositions.push_back(temp);
 		}
 	}
+	
 	for (int i{}; i < offset; i++)
 	{
 		Tile tile;
@@ -74,9 +75,18 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 
 Transform HexGrid::GetGridPosition(int x, int y)
 {
+	for (Disk* pDisk : m_Disks)
+	{
+		if (pDisk->x == x && pDisk->y == y)
+		{
+			return GetGridPosition(0,0);
+		}
+	}
+
+	
 	if (x >= m_Height || y > x || y < 0 || x < 0)
 	{
-		return m_TilePositions[0];
+		return Transform();
 	}
 	
 	int offset = x * 2;
@@ -114,6 +124,21 @@ void HexGrid::TouchTile(int x, int y, bool evil)
 	SwapPicture(index, evil);
 }
 
+std::shared_ptr<GameObject> HexGrid::SpawnDiskTile()
+{
+	int randX = rand() % (m_Height - 1);
+	bool isLeft = rand() % 2;
+	if (isLeft)
+	{
+		m_Disks.push_back(new Disk(randX, randX + 1, m_Size, GetGridPosition(randX, randX)));
+	}
+	else
+	{
+		m_Disks.push_back(new Disk(randX, -1, m_Size, GetGridPosition(randX, 0)));
+	}
+	return m_Disks[m_Disks.size() - 1]->pDisk;
+}
+
 std::vector<std::shared_ptr<GameObject>> HexGrid::GetGameObjects()
 {
 	std::vector<std::shared_ptr<GameObject>> m_GameObjects{};
@@ -123,6 +148,30 @@ std::vector<std::shared_ptr<GameObject>> HexGrid::GetGameObjects()
 	}
 	m_GameObjects.push_back(m_pPlayfield);
 	return m_GameObjects;
+}
+
+HexGrid::Disk::Disk(int x, int y,float tileSize,Transform gridClose)
+	:x(x)
+	,y(y)
+{
+	pDisk = std::make_shared<GameObject>();
+	pDisk->AddComponent(new TransformComponent(pDisk.get(), &location));
+	pDisk->AddComponent(new TextureRenderComponent(pDisk.get(), "../Data/Coily.png"));
+
+	if (y<0)
+	{
+		location.SetPosition(gridClose.GetPosition().x + tileSize * 2,
+			gridClose.GetPosition().y,
+			gridClose.GetPosition().z);
+	}
+	else
+	{
+		location.SetPosition(gridClose.GetPosition().x - tileSize * 2,
+			gridClose.GetPosition().y,
+			gridClose.GetPosition().z);
+	}
+
+	
 }
 
 void HexGrid::SwapPicture(int index, bool evil)

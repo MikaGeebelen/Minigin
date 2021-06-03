@@ -241,8 +241,6 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\Lua.dll" "$(OutputPath)" /R 
     <ClInclude Include="Observer.h" />
     <ClInclude Include="ObserverComponent.h" />
     <ClInclude Include="Score.h" />
-    <ClInclude Include="Script.h" />
-    <ClInclude Include="ScriptComponent.h" />
     <ClInclude Include="ServiceLocater.h" />
     <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="SubjectComponent.h" />
@@ -319,8 +317,6 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\Lua.dll" "$(OutputPath)" /R 
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="ObserverComponent.cpp" />
     <ClCompile Include="Score.cpp" />
-    <ClCompile Include="Script.cpp" />
-    <ClCompile Include="ScriptComponent.cpp" />
     <ClCompile Include="ServiceLocater.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="SubjectComponent.cpp" />
