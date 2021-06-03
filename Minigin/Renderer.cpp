@@ -8,6 +8,7 @@
 #include "imgui-master/backends/imgui_impl_sdl.h"
 #include "imgui-master/backends/imgui_impl_opengl2.h"
 
+#include "imguiMenu.h"
 
 int GetOpenGLDriverIndex()
 {
@@ -43,21 +44,6 @@ void Renderer::Render()
 	SDL_RenderClear(m_Renderer);
 
 	SceneManager::GetInstance().Render();
-
-	//ImGui_ImplOpenGL2_NewFrame();
-	//ImGui_ImplSDL2_NewFrame(m_pWindow);
-	//ImGui::NewFrame();
-	//
-	//ImGui::Button("single player");
-	//ImGui::Button("co-op");
-	//ImGui::Button("versus");
-	//ImGui::Text("Q and W kill the players\nA and S give the players points\n");
-	//if (m_ShowDemo)
-	//{
-	//	ImGui::ShowDemoWindow(&m_ShowDemo);
-	//}
-	//ImGui::Render();
-	//ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 	
 	SDL_RenderPresent(m_Renderer);
 }
@@ -73,6 +59,13 @@ void Renderer::Destroy()
 		SDL_DestroyRenderer(m_Renderer);
 		m_Renderer = nullptr;
 	}
+	
+	if (m_pImguiMenu != nullptr)
+	{
+		delete m_pImguiMenu;
+		m_pImguiMenu = nullptr;
+	}
+
 }
 
 void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const

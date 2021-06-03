@@ -39,18 +39,34 @@ Scene& SceneManager::CreateScene(const std::string& name)
 	return *scene;
 }
 
-void SceneManager::CreateScene(const std::string& path, std::vector<LuaFunctions> generatorFunctions)
+void SceneManager::OpenLua(const std::string& path, std::vector<LuaFunctions> generatorFunctions)
 {
-	lua_State* pL = luaL_newstate();
-	luaL_openlibs(pL);
-	for (LuaFunctions function : generatorFunctions)
+	if (m_pL == nullptr)
 	{
-		lua_register(pL, function.name.c_str(), function.func);
-	}
+		m_pL = luaL_newstate();
+		luaL_openlibs(m_pL);
+		for (LuaFunctions function : generatorFunctions)
+		{
+			lua_register(m_pL, function.name.c_str(), function.func);
+		}
 
-	luaL_dofile(pL, path.c_str());
-	
-	lua_close(pL);
+		luaL_dofile(m_pL, path.c_str());
+	}
+}
+
+void SceneManager::CloseLua()
+{
+	lua_close(m_pL);
+}
+
+void SceneManager::UseFunction(const std::string& function, int data)
+{
+	lua_getglobal(m_pL, function.c_str());
+	if (lua_isfunction(m_pL, -1))
+	{
+		lua_pushnumber(m_pL, data);
+		lua_pcall(m_pL, 1, 1, 0);
+	}
 }
 
 std::shared_ptr<Scene> SceneManager::GetScene(const std::string& name)
@@ -64,6 +80,16 @@ std::shared_ptr<Scene> SceneManager::GetScene(const std::string& name)
 	}
 
 	return nullptr;
+}
+
+void SceneManager::SetSceneActive(const std::string& name)
+{
+	for (std::shared_ptr<Scene> scene : m_Scenes)
+	{
+		scene->SetIsSceneActive(false);
+	}
+
+	GetScene(name)->SetIsSceneActive(true);
 }
 
 

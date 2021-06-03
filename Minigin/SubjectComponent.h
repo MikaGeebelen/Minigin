@@ -3,6 +3,7 @@
 #include "Observer.h"
 #include "vector"
 class ObserverComponent;
+class Event;
 class SubjectComponent : public BaseComponent
 {
 public:
@@ -17,7 +18,7 @@ public:
 	void RemoveObserver(ObserverComponent* obserever);
 
 
-	void Notify(Observer::Events event);
+	void Notify(Event* event);
 	void Render() override;
 	void Update(const float& deltaTime) override;
 

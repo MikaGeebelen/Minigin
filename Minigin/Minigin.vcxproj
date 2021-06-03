@@ -232,8 +232,10 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\Lua.dll" "$(OutputPath)" /R 
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Components.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="imguiMenu.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Lives.h" />
     <ClInclude Include="Minigin.h" />
@@ -301,8 +303,10 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\Lua.dll" "$(OutputPath)" /R 
     </ClCompile>
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="Command.cpp" />
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="imguiMenu.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Lives.cpp" />
     <ClCompile Include="Main.cpp" />

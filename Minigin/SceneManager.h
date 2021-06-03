@@ -17,9 +17,13 @@ public:
 	};
 	
 	Scene& CreateScene(const std::string& name);
-	void CreateScene(const std::string& path, std::vector<LuaFunctions> generatorFunctions);
-
+	
+	void OpenLua(const std::string& path, std::vector<LuaFunctions> generatorFunctions);
+	void UseFunction(const std::string& function, int data);
+	void CloseLua();
+	
 	std::shared_ptr<Scene> GetScene(const std::string& name);
+	void SetSceneActive(const std::string& name);
 	
 	void Update(const float& deltaTime);
 	void Render();
@@ -27,6 +31,8 @@ private:
 	friend class Singleton<SceneManager>;
 	SceneManager() = default;
 	std::vector<std::shared_ptr<Scene>> m_Scenes;
+
+	lua_State* m_pL;
 
 };
 

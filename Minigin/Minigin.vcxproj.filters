@@ -43,6 +43,9 @@
     <Filter Include="Source Files\Helper">
       <UniqueIdentifier>{63fd9bb6-465b-4edf-8cb7-11ef5f28ee68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Helper\IMGUI">
+      <UniqueIdentifier>{ba56d8b6-71c0-418d-a623-1465dd18df05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -147,6 +150,12 @@
     <ClInclude Include="Components.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Source Files\Obserever</Filter>
+    </ClInclude>
+    <ClInclude Include="imguiMenu.h">
+      <Filter>Source Files\Helper\IMGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -244,6 +253,12 @@
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Source Files\Obserever</Filter>
+    </ClCompile>
+    <ClCompile Include="imguiMenu.cpp">
+      <Filter>Source Files\Helper\IMGUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

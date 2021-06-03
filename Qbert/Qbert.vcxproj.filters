@@ -25,6 +25,12 @@
     <Filter Include="Source Files\GameComponents\MoveRules">
       <UniqueIdentifier>{89caa98d-f4f3-4e0a-a71f-61eddf2bda66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObservers\LevelEvents">
+      <UniqueIdentifier>{e32c58bc-26f8-4556-86bc-6c8ebb36a2de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StartMenu">
+      <UniqueIdentifier>{44da8403-0cb8-45f8-b62d-3b743cfc7f55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,6 +69,15 @@
     <ClCompile Include="GridManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LevelObserver.cpp">
+      <Filter>Source Files\GameObservers</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEvent.cpp">
+      <Filter>Source Files\GameObservers\LevelEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QbertApplication.h">
@@ -97,6 +112,15 @@
     </ClInclude>
     <ClInclude Include="GridManager.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelObserver.h">
+      <Filter>Source Files\GameObservers</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEvent.h">
+      <Filter>Source Files\GameObservers\LevelEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

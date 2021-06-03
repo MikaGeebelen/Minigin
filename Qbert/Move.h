@@ -9,6 +9,12 @@ class Move
 {
 public:
 	Move(int x, int y);
+	virtual ~Move() = default;
+	Move(const Move& other) = delete;
+	Move(Move&& other) = delete;
+	Move& operator=(const Move& other) = delete;
+	Move& operator=(Move&& other) = delete;
+	
 	virtual Transform UpdateMove(const float& deltaTime) = 0;
 	virtual glm::ivec2 GetGridPos();
 protected:

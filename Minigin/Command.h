@@ -31,25 +31,25 @@ private:
 	bool m_CyclesUp;
 };
 
-class Die : public Command
-{
-public:
-	Die(SubjectComponent* subject):m_pSubject(subject)
-	{}
-	void Execute() override { m_pSubject->Notify(Observer::Died); };
-private:
-	SubjectComponent* m_pSubject = nullptr;
-};
-
-class GainPoints : public Command
-{
-public:
-	GainPoints(SubjectComponent* subject) :m_pSubject(subject)
-	{}
-	void Execute() override { m_pSubject->Notify(Observer::Coily); };
-private:
-	SubjectComponent* m_pSubject = nullptr;
-};
+//class Die : public Command
+//{
+//public:
+//	Die(SubjectComponent* subject):m_pSubject(subject)
+//	{}
+//	void Execute() override { m_pSubject->Notify(Observer::Died); };
+//private:
+//	SubjectComponent* m_pSubject = nullptr;
+//};
+//
+//class GainPoints : public Command
+//{
+//public:
+//	GainPoints(SubjectComponent* subject) :m_pSubject(subject)
+//	{}
+//	void Execute() override { m_pSubject->Notify(Observer::Coily); };
+//private:
+//	SubjectComponent* m_pSubject = nullptr;
+//};
 
 class DiamondSound : public Command
 {

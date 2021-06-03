@@ -9,6 +9,9 @@ public:
 	void UserInitialize() override;
 	void UserLoadGame() const override;
 	void UserCleanup() override;
+
+private:
+	int m_Level = 1;
 };
 
 

@@ -16,10 +16,14 @@
 #include <TimeComponent.h>
 #include <ObserverComponent.h>
 #include <SubjectComponent.h>
+#include "GridMoveComponent.h"
+//movement rules
+#include "PlayerMove.h"
 //observer
 #include <Observer.h>
 #include <Lives.h>
 #include <Score.h>
+#include "LevelObserver.h"
 //services
 #include <ServiceLocater.h>
 
@@ -175,6 +179,8 @@ void QbertApplication::UserLoadGame() const
 	//
 	//scene.SetIsSceneActive(true);
 
+
+	
 	std::vector<SceneManager::LuaFunctions> functions{};
 	SceneManager::LuaFunctions function{"CreateScene",LuaCreateScene};
 	functions.push_back(function);
@@ -182,22 +188,36 @@ void QbertApplication::UserLoadGame() const
 	functions.push_back(function);
 	function = { "AddPlayer",LuaAddPlayer };
 	functions.push_back(function);
+	function = { "SetScene",LuaSetSceneActive };
+	functions.push_back(function);
 
-	SceneManager::GetInstance().CreateScene("../Level1.Lua", functions);
-	
+	SceneManager::GetInstance().OpenLua("../Levels.Lua", functions);
+	SceneManager::GetInstance().UseFunction("levelp1", 1);
+	std::shared_ptr<Scene> scene = SceneManager::GetInstance().GetScene("Level1");
 }
 
 void QbertApplication::UserCleanup()
 {
+	HexGrid* pGrid = GridManager::GetInstance().GetCurrentGrid();
+	delete pGrid;
+	SceneManager::GetInstance().CloseLua();
 }
 
 int LuaAddPlayer(lua_State* L)
 {
 	HexGrid* pGrid = GridManager::GetInstance().GetCurrentGrid();
-	Qbert* pQbert = new Qbert((int)lua_tonumber(L, 2), (int)lua_tonumber(L, 3), (int)lua_tonumber(L, 4), lua_tostring(L, 5), pGrid);
+	//Qbert* pQbert = new Qbert((int)lua_tonumber(L, 2), (int)lua_tonumber(L, 3), (int)lua_tonumber(L, 4), lua_tostring(L, 5), pGrid);
+
+	std::shared_ptr<GameObject> pQbert = std::make_shared<GameObject>();
+	Transform* transform = new Transform(pGrid->GetGridPosition((int)lua_tonumber(L, 3), (int)lua_tonumber(L, 4)));
 	
+	pQbert->AddComponent(new TransformComponent(pQbert.get(), transform));
+	pQbert->AddComponent(new TextureRenderComponent(pQbert.get(), lua_tostring(L, 5)));
+	pQbert->AddComponent(new SubjectComponent(pQbert.get()));
+	pQbert->AddComponent(new GridMoveComponent(pQbert.get(), pGrid, new PlayerMove((int)lua_tonumber(L, 2), pGrid, (int)lua_tonumber(L, 3), (int)lua_tonumber(L, 4)), transform, (int)lua_tonumber(L, 3), (int)lua_tonumber(L, 4), true, true));
+
 	auto scene = SceneManager::GetInstance().GetScene(lua_tostring(L, 1));
-	scene->Add(pQbert->GetGameObject());
+	scene->Add(pQbert);
 	return 0;
 }
 
@@ -218,6 +238,20 @@ int LuaGenerateGrid(lua_State* L)
 	{
 		scene->Add(object);
 	}
+
+	lua_getglobal(L, "level");
+	int level = (int)lua_tonumber(L, -1);
+	lua_getglobal(L, "gameMode");
+	std::string gameMode = lua_tostring(L, -1);
+
+	std::shared_ptr<GameObject> go = std::make_shared<GameObject>();
+	ObserverComponent* pLevelObserver = new ObserverComponent(go.get(), new LevelObserver(level, gameMode));
+	GridManager::GetInstance().GetCurrentGrid()->GetSubject()->AddObserver(pLevelObserver);
+	go->AddComponent(pLevelObserver);
+	scene->Add(go);
+
+	lua_pushnumber(L, level + 1);
+	lua_setglobal(L, "level");
 	return 0;
 }
 
@@ -225,5 +259,11 @@ int LuaCreateScene(lua_State* L)
 {
 	auto& scene = SceneManager::GetInstance().CreateScene(lua_tostring(L, 1));
 	scene.SetIsSceneActive(true);
+	return 0;
+}
+
+int LuaSetSceneActive(lua_State* L)
+{
+	SceneManager::GetInstance().SetSceneActive(lua_tostring(L, 1));
 	return 0;
 }

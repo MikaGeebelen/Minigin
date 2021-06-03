@@ -5,6 +5,9 @@
 
 #include "ResourceManager.h"
 
+//level events
+#include "LevelEvent.h"
+
 HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std::vector<std::string> images, bool cycles)
 	:m_Height(height)
 	,m_Size(tileSize)
@@ -13,14 +16,15 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 	,m_Disks()
 {
 	m_pPlayfield = std::make_shared<GameObject>();
-	m_pPlayfield->AddComponent(new TransformComponent(m_pPlayfield.get(), &position));
-
+	m_pPlayfield->AddComponent(new TransformComponent(m_pPlayfield.get(), new Transform(position)));
+	m_pSubject = new SubjectComponent(m_pPlayfield.get());
+	m_pPlayfield->AddComponent(m_pSubject);
+	
 	for (const std::string& path : images)
 	{
 		m_Textures.push_back(ResourceManager::GetInstance().LoadTexture(path));
 	}
 
-	
 	int offset = (height-1) * 2 + 1;
 	for (int i = 1; i < height; i++)
 	{
@@ -56,7 +60,7 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 			temp.SetPosition(position.GetPosition().x + (y * tempWidth) - pyramidWidthOffset,
 							 position.GetPosition().y + (x * tempHeight * 0.75f),
 							 position.GetPosition().z);
-			m_TilePositions.push_back(temp);
+			m_TilePositions.push_back(new Transform(temp));
 		}
 	}
 	
@@ -64,7 +68,7 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 	{
 		Tile tile;
 		tile.pTile = std::make_shared<GameObject>();
-		tile.pTile->AddComponent(new TransformComponent(tile.pTile.get(), &m_TilePositions[i]));
+		tile.pTile->AddComponent(new TransformComponent(tile.pTile.get(), m_TilePositions[i]));
 		tile.pTextureRenderer = new TextureRenderComponent(tile.pTile.get(), images[0]);
 		tile.CurrentTextureNumber = 0;
 		tile.pTile->AddComponent(tile.pTextureRenderer);
@@ -75,7 +79,7 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 
 Transform HexGrid::GetGridPosition(int x, int y)
 {
-	for (Disk* pDisk : m_Disks)
+	for (std::shared_ptr<Disk> pDisk : m_Disks)
 	{
 		if (pDisk->x == x && pDisk->y == y)
 		{
@@ -97,7 +101,7 @@ Transform HexGrid::GetGridPosition(int x, int y)
 
 	int index = offset - y;
 	
-	return m_TilePositions[index];
+	return *m_TilePositions[index];
 }
 
 void HexGrid::TouchTile(int x, int y, bool evil)
@@ -124,17 +128,22 @@ void HexGrid::TouchTile(int x, int y, bool evil)
 	SwapPicture(index, evil);
 }
 
+SubjectComponent* HexGrid::GetSubject()
+{
+	return m_pSubject;
+}
+
 std::shared_ptr<GameObject> HexGrid::SpawnDiskTile()
 {
 	int randX = rand() % (m_Height - 1);
 	bool isLeft = rand() % 2;
 	if (isLeft)
 	{
-		m_Disks.push_back(new Disk(randX, randX + 1, m_Size, GetGridPosition(randX, randX)));
+		m_Disks.push_back(std::make_shared<Disk>(randX, randX + 1, m_Size, GetGridPosition(randX, randX)));
 	}
 	else
 	{
-		m_Disks.push_back(new Disk(randX, -1, m_Size, GetGridPosition(randX, 0)));
+		m_Disks.push_back(std::make_shared<Disk>(randX, -1, m_Size, GetGridPosition(randX, 0)));
 	}
 	return m_Disks[m_Disks.size() - 1]->pDisk;
 }
@@ -176,6 +185,7 @@ HexGrid::Disk::Disk(int x, int y,float tileSize,Transform gridClose)
 
 void HexGrid::SwapPicture(int index, bool evil)
 {
+
 	if (evil)
 	{
 		if (m_BoardTiles[index].CurrentTextureNumber - 1 > 0)
@@ -190,7 +200,7 @@ void HexGrid::SwapPicture(int index, bool evil)
 			}
 		}
 	}
-	else if (m_BoardTiles[index].CurrentTextureNumber + 1 >= m_Textures.size())
+	else if (m_BoardTiles[index].CurrentTextureNumber + 1 >= (int)m_Textures.size())
 	{
 		if (m_Cycles)
 		{
@@ -203,4 +213,17 @@ void HexGrid::SwapPicture(int index, bool evil)
 	}
 	
 	m_BoardTiles[index].pTextureRenderer->SetTexture(m_Textures[m_BoardTiles[index].CurrentTextureNumber]);
+	IsLevelFinished();
+}
+
+void HexGrid::IsLevelFinished()
+{
+	for (Tile tile : m_BoardTiles)
+	{
+		if (tile.CurrentTextureNumber != m_States - 1)
+		{
+			return;
+		}
+	}
+	m_pSubject->Notify(new LevelEvent(LevelEvent::LevelEvents::LevelFinished));
 }

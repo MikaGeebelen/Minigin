@@ -4,5 +4,5 @@ class QbertPos : public Observer
 {
 
 public:
-	void OnNotify(Events event) override;
+	void OnNotify(Event* event) override;
 };

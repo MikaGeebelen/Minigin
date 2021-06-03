@@ -14,6 +14,11 @@ GridMoveComponent::GridMoveComponent(GameObject* const parent, HexGrid* pGrid, M
 {
 }
 
+GridMoveComponent::~GridMoveComponent()
+{
+	delete m_pMovementType;
+}
+
 void GridMoveComponent::Render()
 {
 }

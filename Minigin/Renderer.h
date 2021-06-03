@@ -4,6 +4,7 @@
 struct SDL_Window;
 struct SDL_Renderer;
 
+class imguiMenu;
 
 	class Texture2D;
 	/**
@@ -24,6 +25,8 @@ private:
 	SDL_Renderer* m_Renderer{};
 	SDL_Window* m_pWindow = nullptr;
 	bool m_ShowDemo = false;
+	imguiMenu* m_pImguiMenu;
+	
 };
 
 

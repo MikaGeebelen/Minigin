@@ -11,7 +11,7 @@ public:
 	ObserverComponent& operator=(const ObserverComponent& other) = delete;
 	ObserverComponent& operator=(ObserverComponent&& other) = delete;
 
-	virtual void OnNotify(Observer::Events event);
+	virtual void OnNotify(Event* event);
 
 	virtual void Render() override;
 	virtual void Update(const float& deltaTime) override;

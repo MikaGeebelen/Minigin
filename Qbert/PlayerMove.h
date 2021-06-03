@@ -11,6 +11,7 @@ class PlayerMove final : public Move
 {
 public:
 	PlayerMove(int playerNum,HexGrid* pCurrentGrid, int x, int y);
+	
 	Transform UpdateMove(const float& deltaTime) override;
 
 private:

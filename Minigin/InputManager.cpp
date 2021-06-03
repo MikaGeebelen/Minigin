@@ -24,7 +24,6 @@ bool InputManager::ProcessInput()
 				{
 					pair.second.command->Execute();
 				}
-				
 			}
 			if (e.type == SDL_KEYUP && pair.second.actionType == ActionType::released)
 			{

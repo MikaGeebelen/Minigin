@@ -30,7 +30,7 @@ void SubjectComponent::RemoveObserver(ObserverComponent* obserever)
 	}
 }
 
-void SubjectComponent::Notify(Observer::Events event)
+void SubjectComponent::Notify(Event* event)
 {
 	for (ObserverComponent* observer : m_pObserevers)
 	{

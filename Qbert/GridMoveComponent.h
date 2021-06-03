@@ -6,7 +6,7 @@ class GridMoveComponent : public BaseComponent
 {
 public:
 	GridMoveComponent(GameObject* const parent, HexGrid* pGrid,Move* pMovement,Transform* pObjectPos, int x, int y, bool changeBlocks = false, bool increaseBlocks = false);
-	~GridMoveComponent() = default;
+	~GridMoveComponent();
 	GridMoveComponent(const GridMoveComponent& other) = delete;
 	GridMoveComponent(GridMoveComponent&& other) = delete;
 	GridMoveComponent& operator=(const GridMoveComponent& other) = delete;

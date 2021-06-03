@@ -5,7 +5,7 @@ class Score : public Observer
 {
 public:
 	Score(TextRenderComponent* text, int score);
-	virtual void OnNotify(Events event) override;
+	virtual void OnNotify(Event* event) override;
 
 private:
 	TextRenderComponent* m_pText;

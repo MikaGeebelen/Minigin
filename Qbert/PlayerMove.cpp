@@ -18,7 +18,7 @@ PlayerMove::PlayerMove(int playerNum, HexGrid* pCurrentGrid, int x, int y)
 		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LDOWN, m_GridPos.x, m_GridPos.y));
 		InputManager::GetInstance().AddKeyBoardCommand("1LDOWN", SDL_SCANCODE_Z, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
 		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RDOWN, m_GridPos.x, m_GridPos.y));
-		InputManager::GetInstance().AddKeyBoardCommand("RDOWN", SDL_SCANCODE_C, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		InputManager::GetInstance().AddKeyBoardCommand("1RDOWN", SDL_SCANCODE_C, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
 	}
 	else if (playerNum ==2)
 	{
@@ -35,9 +35,10 @@ PlayerMove::PlayerMove(int playerNum, HexGrid* pCurrentGrid, int x, int y)
 }
 
 
+
 Transform PlayerMove::UpdateMove(const float& deltaTime)
 {
-	for (int i{};i<m_MoveCommands.size();i++)
+	for (size_t i{};i< m_MoveCommands.size();i++)
 	{
 		if (!m_MoveCommands[i]->GetCurrentLoc().IsNearlyEqual(m_MoveCommands[i]->GetNextLoc()))
 		{

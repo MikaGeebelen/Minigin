@@ -72,19 +72,20 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Minigin;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Minigin;C:\Program Files %28x86%29\Visual Leak Detector\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Visual Leak Detector\lib\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)Minigin;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Minigin;C:\Program Files %28x86%29\Visual Leak Detector\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Minigin;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Minigin;C:\Program Files %28x86%29\Visual Leak Detector\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)Minigin;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Minigin;C:\Program Files %28x86%29\Visual Leak Detector\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -192,7 +193,10 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     <ClCompile Include="GridManager.cpp" />
     <ClCompile Include="GridMoveComponent.cpp" />
     <ClCompile Include="HexGrid.cpp" />
+    <ClCompile Include="LevelEvent.cpp" />
+    <ClCompile Include="LevelObserver.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="PlayerMove.cpp" />
@@ -206,6 +210,9 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     <ClInclude Include="GridManager.h" />
     <ClInclude Include="GridMoveComponent.h" />
     <ClInclude Include="HexGrid.h" />
+    <ClInclude Include="LevelEvent.h" />
+    <ClInclude Include="LevelObserver.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="PlayerMove.h" />

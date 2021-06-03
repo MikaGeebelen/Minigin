@@ -12,7 +12,7 @@ ObserverComponent::~ObserverComponent()
 	delete m_pObserver;
 }
 
-void ObserverComponent::OnNotify(Observer::Events event)
+void ObserverComponent::OnNotify(Event* event)
 {
 	m_pObserver->OnNotify(event);
 }

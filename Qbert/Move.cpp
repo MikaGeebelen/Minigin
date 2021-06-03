@@ -11,6 +11,8 @@ Move::Move(int x,int y)
 {
 }
 
+
+
 glm::ivec2 Move::GetGridPos()
 {
 	return m_GridPos;
