@@ -64,6 +64,18 @@ bool InputManager::ProcessInput()
 	return true;
 }
 
+void InputManager::ClearInput()
+{
+	for (std::pair<std::string, KeyBoardInputInfo> pair : m_KeyBoardCommands)
+	{
+		delete pair.second.command;
+	}
+	for (std::pair<std::string, InputInfo> pair : m_ConsoleCommands)
+	{
+		delete pair.second.command;
+	}
+}
+
 bool InputManager::IsPressed(const std::string& buttonName)
 {
 	if (!m_ConsoleCommands.at(buttonName).once && m_CurrentState.Gamepad.wButtons & m_ConsoleCommands.at(buttonName).bitmask)

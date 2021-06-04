@@ -21,6 +21,8 @@ public:
 	void RenderTexture(const Texture2D& texture, float x, float y, float width, float height) const;
 
 	SDL_Renderer* GetSDLRenderer() const { return m_Renderer; }
+
+	void AddImguiMenu(imguiMenu* pNewMenu);
 private:
 	SDL_Renderer* m_Renderer{};
 	SDL_Window* m_pWindow = nullptr;

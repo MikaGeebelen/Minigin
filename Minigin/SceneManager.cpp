@@ -39,7 +39,7 @@ Scene& SceneManager::CreateScene(const std::string& name)
 	return *scene;
 }
 
-void SceneManager::OpenLua(const std::string& path, std::vector<LuaFunctions> generatorFunctions)
+void SceneManager::OpenLua(const std::string& path, std::vector<LuaFunctions> generatorFunctions,const std::string& gameMode)
 {
 	if (m_pL == nullptr)
 	{
@@ -51,6 +51,10 @@ void SceneManager::OpenLua(const std::string& path, std::vector<LuaFunctions> ge
 		}
 
 		luaL_dofile(m_pL, path.c_str());
+
+
+		lua_pushstring(m_pL, gameMode.c_str());
+		lua_setglobal(m_pL, "gameMode");
 	}
 }
 

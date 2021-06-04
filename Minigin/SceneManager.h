@@ -18,7 +18,7 @@ public:
 	
 	Scene& CreateScene(const std::string& name);
 	
-	void OpenLua(const std::string& path, std::vector<LuaFunctions> generatorFunctions);
+	void OpenLua(const std::string& path, std::vector<LuaFunctions> generatorFunctions, const std::string& gameMode);
 	void UseFunction(const std::string& function, int data);
 	void CloseLua();
 	

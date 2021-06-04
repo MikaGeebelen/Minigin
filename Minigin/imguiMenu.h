@@ -1,5 +1,5 @@
 #pragma once
-
+struct SDL_Window;
 class imguiMenu
 {
 public:
@@ -11,5 +11,9 @@ public:
 	imguiMenu& operator=(imguiMenu&& other) = delete;
 	
 	virtual void render() = 0;
+	void AddWindow(SDL_Window* pWindow);
+protected:
+	SDL_Window* m_pWindow = nullptr;
+
 };
 

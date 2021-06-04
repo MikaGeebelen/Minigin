@@ -5,6 +5,7 @@
 #include "Observer.h"
 #include "ObserverComponent.h"
 
+#include "Event.h"
 
 SubjectComponent::SubjectComponent(GameObject* const parent)
 	:BaseComponent(parent)
@@ -36,6 +37,8 @@ void SubjectComponent::Notify(Event* event)
 	{
 		observer->OnNotify(event);
 	}
+	delete event;
+	event = nullptr;
 }
 
 void SubjectComponent::Render()

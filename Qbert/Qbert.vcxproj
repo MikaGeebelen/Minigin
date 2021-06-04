@@ -94,7 +94,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>D:\Programming\Minigin\3rdParty\SDL2_mixer-2.0.4\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\Lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\Imgui-1.81;$(SolutionDir)3rdParty\Lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,7 +144,7 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>D:\Programming\Minigin\3rdParty\SDL2_mixer-2.0.4\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\Lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\Imgui-1.81;$(SolutionDir)3rdParty\Lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -197,6 +197,9 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     <ClCompile Include="LevelObserver.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MenuComponent.cpp" />
+    <ClCompile Include="MenuEvent.cpp" />
+    <ClCompile Include="MenuObserver.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="PlayerMove.cpp" />
@@ -213,6 +216,9 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     <ClInclude Include="LevelEvent.h" />
     <ClInclude Include="LevelObserver.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MenuComponent.h" />
+    <ClInclude Include="MenuEvent.h" />
+    <ClInclude Include="MenuObserver.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="PlayerMove.h" />

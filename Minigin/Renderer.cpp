@@ -44,7 +44,12 @@ void Renderer::Render()
 	SDL_RenderClear(m_Renderer);
 
 	SceneManager::GetInstance().Render();
-	
+
+	if (m_pImguiMenu != nullptr)
+	{
+		m_pImguiMenu->render();
+	}
+
 	SDL_RenderPresent(m_Renderer);
 }
 
@@ -85,4 +90,12 @@ void Renderer::RenderTexture(const Texture2D& texture, const float x, const floa
 	dst.w = static_cast<int>(width);
 	dst.h = static_cast<int>(height);
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+}
+
+void Renderer::AddImguiMenu(imguiMenu* pNewMenu)
+{
+	delete	m_pImguiMenu;
+	m_pImguiMenu = pNewMenu;
+
+	m_pImguiMenu->AddWindow(m_pWindow);
 }

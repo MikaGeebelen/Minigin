@@ -61,10 +61,12 @@ class InputManager final : public Singleton<InputManager>
 {
 public:
 	bool ProcessInput();
-
+	void ClearInput();
 	void AddControllerCommand(unsigned int gamepadBitMask, std::string commandName, ActionType action, Command* command);
 	void AddKeyBoardCommand(std::string commandName, SDL_Scancode button, ActionType action, Command* command);
 	~InputManager();
+
+
 
 private:
 	bool IsPressed(const std::string& buttonName);

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <Minigin.h>
+#include <string>
 class HexGrid;
 class scene;
 struct lua_State;
@@ -10,8 +11,7 @@ public:
 	void UserLoadGame() const override;
 	void UserCleanup() override;
 
-private:
-	int m_Level = 1;
+	void StartGame(const std::string& gameMode) const;
 };
 
 

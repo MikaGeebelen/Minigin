@@ -25,11 +25,11 @@
     <Filter Include="Source Files\GameComponents\MoveRules">
       <UniqueIdentifier>{89caa98d-f4f3-4e0a-a71f-61eddf2bda66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObservers\LevelEvents">
-      <UniqueIdentifier>{e32c58bc-26f8-4556-86bc-6c8ebb36a2de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\StartMenu">
       <UniqueIdentifier>{44da8403-0cb8-45f8-b62d-3b743cfc7f55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObservers\Events">
+      <UniqueIdentifier>{e32c58bc-26f8-4556-86bc-6c8ebb36a2de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -73,10 +73,19 @@
       <Filter>Source Files\GameObservers</Filter>
     </ClCompile>
     <ClCompile Include="LevelEvent.cpp">
-      <Filter>Source Files\GameObservers\LevelEvents</Filter>
+      <Filter>Source Files\GameObservers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuComponent.cpp">
+      <Filter>Source Files\GameComponents</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\StartMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuObserver.cpp">
+      <Filter>Source Files\GameObservers</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuEvent.cpp">
+      <Filter>Source Files\GameObservers\Events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,10 +126,19 @@
       <Filter>Source Files\GameObservers</Filter>
     </ClInclude>
     <ClInclude Include="LevelEvent.h">
-      <Filter>Source Files\GameObservers\LevelEvents</Filter>
+      <Filter>Source Files\GameObservers\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuComponent.h">
+      <Filter>Source Files\GameComponents</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\StartMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuObserver.h">
+      <Filter>Source Files\GameObservers</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuEvent.h">
+      <Filter>Source Files\GameObservers\Events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

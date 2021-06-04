@@ -6,6 +6,8 @@
 #include "BaseScript.h"
 #include "map"
 
+#include <vector>
+
 class Texture2D;
 class GameObject final
 {
