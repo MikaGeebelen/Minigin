@@ -1,5 +1,8 @@
 #pragma once
 #include <Singleton.h>
+#include <memory>
+#include <vector>
+class GameObject;
 class HexGrid;
 class GridManager final : public Singleton<GridManager>
 {

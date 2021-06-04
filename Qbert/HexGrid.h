@@ -16,10 +16,28 @@ public:
 	Transform GetGridPosition(int x, int y);
 	void TouchTile(int x, int y, bool evil = false);
 	SubjectComponent* GetSubject();
-	
+
 	std::shared_ptr<GameObject> SpawnDiskTile();
 	
 	std::vector<std::shared_ptr<GameObject>> GetGameObjects();
+
+	enum class CharacterType
+	{
+		Player,
+		Enemy,
+		KillableEnemy,
+		Empty
+	};
+
+	struct TileOccupation
+	{
+		int x;
+		int y;
+		CharacterType type;
+	};
+	
+	void SetOccupied(int x, int y, CharacterType type);
+	CharacterType GetIsTileOccupied(int x, int y);
 	
 	struct Tile
 	{
@@ -58,5 +76,6 @@ private:
 
 	std::vector<Transform*> m_TilePositions;
 	std::vector<std::shared_ptr<Disk>> m_Disks;
-	
+
+	std::vector<TileOccupation> m_Occupations;
 };

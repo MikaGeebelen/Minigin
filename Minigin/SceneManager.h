@@ -23,7 +23,9 @@ public:
 	void CloseLua();
 	
 	std::shared_ptr<Scene> GetScene(const std::string& name);
+	std::shared_ptr<Scene> GetActiveScene();
 	void SetSceneActive(const std::string& name);
+
 	
 	void Update(const float& deltaTime);
 	void Render();

@@ -35,7 +35,6 @@ PlayerMove::PlayerMove(int playerNum, HexGrid* pCurrentGrid, int x, int y)
 }
 
 
-
 Transform PlayerMove::UpdateMove(const float& deltaTime)
 {
 	for (size_t i{};i< m_MoveCommands.size();i++)
@@ -88,7 +87,6 @@ void PlayerMove::ResetCommands(Transform newPos)
 		m_GridPos = { 0,0 };
 	}
 
-	
 	for (MoveCommand* pCommand : m_MoveCommands)
 	{
 		pCommand->ResetLoc(newPos);

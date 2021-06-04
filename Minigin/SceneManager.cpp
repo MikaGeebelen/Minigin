@@ -34,8 +34,12 @@ void SceneManager::Render()
 
 Scene& SceneManager::CreateScene(const std::string& name)
 {
-	const auto scene = std::shared_ptr<Scene>(new Scene(name));
-	m_Scenes.push_back(scene);
+	auto scene = GetScene(name);
+	if (scene == nullptr)
+	{
+		scene = std::shared_ptr<Scene>(new Scene(name));
+		m_Scenes.push_back(scene);
+	}
 	return *scene;
 }
 
@@ -83,6 +87,18 @@ std::shared_ptr<Scene> SceneManager::GetScene(const std::string& name)
 		}
 	}
 
+	return nullptr;
+}
+
+std::shared_ptr<Scene> SceneManager::GetActiveScene()
+{
+	for (std::shared_ptr<Scene> scene : m_Scenes)
+	{
+		if (scene->GetIsSceneActive())
+		{
+			return scene;
+		}
+	}
 	return nullptr;
 }
 

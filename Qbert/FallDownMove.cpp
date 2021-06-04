@@ -1,9 +1,19 @@
 #include "FallDownMove.h"
+
+#include "HexGrid.h"
 #include "MoveCommand.h"
+
 FallDownMove::FallDownMove(HexGrid* pCurrentGrid, int x, int y)
 	:Move(x, y)
+	,m_pGrid(pCurrentGrid)
 {
 	m_pMoveCommand = new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LDOWN,m_GridPos.x,m_GridPos.y);
+}
+
+FallDownMove::~FallDownMove()
+{
+	delete m_pMoveCommand;
+	m_pMoveCommand = nullptr;
 }
 
 Transform FallDownMove::UpdateMove(const float& deltaTime)

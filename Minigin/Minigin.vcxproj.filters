@@ -117,12 +117,6 @@
     <ClInclude Include="Observer.h">
       <Filter>Source Files\Obserever</Filter>
     </ClInclude>
-    <ClInclude Include="Lives.h">
-      <Filter>Source Files\Obserever</Filter>
-    </ClInclude>
-    <ClInclude Include="Score.h">
-      <Filter>Source Files\Obserever</Filter>
-    </ClInclude>
     <ClInclude Include="ServiceLocater.h">
       <Filter>Source Files\Services</Filter>
     </ClInclude>
@@ -222,12 +216,6 @@
       <Filter>Source Files\Input</Filter>
     </ClCompile>
     <ClCompile Include="Observer.cpp">
-      <Filter>Source Files\Obserever</Filter>
-    </ClCompile>
-    <ClCompile Include="Lives.cpp">
-      <Filter>Source Files\Obserever</Filter>
-    </ClCompile>
-    <ClCompile Include="Score.cpp">
       <Filter>Source Files\Obserever</Filter>
     </ClCompile>
     <ClCompile Include="ServiceLocater.cpp">

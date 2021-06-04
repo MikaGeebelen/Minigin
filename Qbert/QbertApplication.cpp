@@ -22,8 +22,8 @@
 #include "PlayerMove.h"
 //observer
 #include <Observer.h>
-#include <Lives.h>
-#include <Score.h>
+#include "Lives.h"
+#include "Score.h"
 #include "LevelObserver.h"
 #include "MenuObserver.h"
 //services
@@ -31,10 +31,9 @@
 
 //game
 #include "HexGrid.h"
-#include "Qbert.h"
-#include "Coily.h"
 
 #include "GridManager.h"
+#include "GameManager.h"
 
 //menus
 #include "MainMenu.h"
@@ -247,6 +246,7 @@ int LuaAddPlayer(lua_State* pL)
 
 	auto scene = SceneManager::GetInstance().GetScene(lua_tostring(pL, 1));
 	scene->Add(pQbert);
+
 	return 0;
 }
 
@@ -268,8 +268,7 @@ int LuaGenerateGrid(lua_State* pL)
 		scene->Add(object);
 	}
 
-	lua_getglobal(pL, "level");
-	int level = (int)lua_tonumber(pL, -1);
+	int level = GameManager::GetInstance().GetLevel();
 	lua_getglobal(pL, "gameMode");
 	std::string gameMode = lua_tostring(pL, -1);
 
@@ -279,7 +278,7 @@ int LuaGenerateGrid(lua_State* pL)
 	go->AddComponent(pLevelObserver);
 	scene->Add(go);
 
-	lua_pushnumber(pL, level + 1);
+	lua_pushnumber(pL, GameManager::GetInstance().GetLevel());
 	lua_setglobal(pL, "level");
 	
 	return 0;
@@ -287,6 +286,12 @@ int LuaGenerateGrid(lua_State* pL)
 
 int LuaCreateScene(lua_State* pL)
 {
+	std::shared_ptr<Scene> oldScene = SceneManager::GetInstance().GetScene(lua_tostring(pL, 1));
+	if (oldScene != nullptr)
+	{
+		oldScene->ClearScene();
+	}
+
 	InputManager::GetInstance().ClearInput();
 	auto& scene = SceneManager::GetInstance().CreateScene(lua_tostring(pL, 1));
 	scene.SetIsSceneActive(true);
@@ -296,5 +301,8 @@ int LuaCreateScene(lua_State* pL)
 int LuaSetSceneActive(lua_State* pL)
 {
 	SceneManager::GetInstance().SetSceneActive(lua_tostring(pL, 1));
+	GameManager::GetInstance().SpawnCoily(0, 0, "../Data/Coily.png", GridManager::GetInstance().GetCurrentGrid());
 	return 0;
 }
+
+

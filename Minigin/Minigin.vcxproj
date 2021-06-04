@@ -237,12 +237,10 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\Lua.dll" "$(OutputPath)" /R 
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="imguiMenu.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Lives.h" />
     <ClInclude Include="Minigin.h" />
     <ClInclude Include="MiniginPCH.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="ObserverComponent.h" />
-    <ClInclude Include="Score.h" />
     <ClInclude Include="ServiceLocater.h" />
     <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="SubjectComponent.h" />
@@ -308,7 +306,6 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\Lua.dll" "$(OutputPath)" /R 
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="imguiMenu.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="Lives.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Minigin.cpp" />
     <ClCompile Include="MiniginPCH.cpp">
@@ -320,7 +317,6 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\Lua.dll" "$(OutputPath)" /R 
     </ClCompile>
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="ObserverComponent.cpp" />
-    <ClCompile Include="Score.cpp" />
     <ClCompile Include="ServiceLocater.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="SubjectComponent.cpp" />

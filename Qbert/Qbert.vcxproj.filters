@@ -31,6 +31,9 @@
     <Filter Include="Source Files\GameObservers\Events">
       <UniqueIdentifier>{e32c58bc-26f8-4556-86bc-6c8ebb36a2de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{88df996c-9437-4a69-affd-c0c920456418}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,14 +42,8 @@
     <ClCompile Include="QbertApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Qbert.cpp">
-      <Filter>Source Files\GamePrefabs</Filter>
-    </ClCompile>
     <ClCompile Include="HexGrid.cpp">
       <Filter>Source Files\GamePrefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="QbertPos.cpp">
-      <Filter>Source Files\GameObservers</Filter>
     </ClCompile>
     <ClCompile Include="GridMoveComponent.cpp">
       <Filter>Source Files\GameComponents</Filter>
@@ -62,12 +59,6 @@
     </ClCompile>
     <ClCompile Include="FallDownMove.cpp">
       <Filter>Source Files\GameComponents\MoveRules</Filter>
-    </ClCompile>
-    <ClCompile Include="Coily.cpp">
-      <Filter>Source Files\GamePrefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="GridManager.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LevelObserver.cpp">
       <Filter>Source Files\GameObservers</Filter>
@@ -87,19 +78,25 @@
     <ClCompile Include="MenuEvent.cpp">
       <Filter>Source Files\GameObservers\Events</Filter>
     </ClCompile>
+    <ClCompile Include="..\Minigin\Score.cpp">
+      <Filter>Source Files\GameObservers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Minigin\Lives.cpp">
+      <Filter>Source Files\GameObservers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GridManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QbertApplication.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Qbert.h">
-      <Filter>Source Files\GamePrefabs</Filter>
-    </ClInclude>
     <ClInclude Include="HexGrid.h">
       <Filter>Source Files\GamePrefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="QbertPos.h">
-      <Filter>Source Files\GameObservers</Filter>
     </ClInclude>
     <ClInclude Include="GridMoveComponent.h">
       <Filter>Source Files\GameComponents</Filter>
@@ -115,12 +112,6 @@
     </ClInclude>
     <ClInclude Include="FallDownMove.h">
       <Filter>Source Files\GameComponents\MoveRules</Filter>
-    </ClInclude>
-    <ClInclude Include="Coily.h">
-      <Filter>Source Files\GamePrefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="GridManager.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="LevelObserver.h">
       <Filter>Source Files\GameObservers</Filter>
@@ -139,6 +130,18 @@
     </ClInclude>
     <ClInclude Include="MenuEvent.h">
       <Filter>Source Files\GameObservers\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Minigin\Score.h">
+      <Filter>Source Files\GameObservers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Minigin\Lives.h">
+      <Filter>Source Files\GameObservers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GridManager.h">
+      <Filter>Source Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

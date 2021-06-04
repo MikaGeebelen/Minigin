@@ -40,6 +40,11 @@ bool Scene::GetIsSceneActive()
 	return  m_IsSceneActive;
 }
 
+void Scene::ClearScene()
+{
+	m_Objects.clear();
+}
+
 const std::string& Scene::GetSceneName()
 {
 	return m_Name;

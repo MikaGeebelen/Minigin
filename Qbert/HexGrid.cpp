@@ -87,7 +87,6 @@ Transform HexGrid::GetGridPosition(int x, int y)
 		}
 	}
 
-	
 	if (x >= m_Height || y > x || y < 0 || x < 0)
 	{
 		return Transform();
@@ -159,6 +158,32 @@ std::vector<std::shared_ptr<GameObject>> HexGrid::GetGameObjects()
 	return m_GameObjects;
 }
 
+void HexGrid::SetOccupied(int x, int y, CharacterType type)
+{
+	for (TileOccupation& tile : m_Occupations)
+	{
+		if (tile.x == x && tile.y == y)
+		{
+			tile.type = type;
+			return;
+		}
+	}
+	m_Occupations.push_back({x,y,type});
+}
+
+HexGrid::CharacterType HexGrid::GetIsTileOccupied(int x, int y)
+{
+	for (TileOccupation tile : m_Occupations)
+	{
+		if (tile.x == x && tile.y == y)
+		{
+			return tile.type;
+		}
+	}
+	
+	return CharacterType::Empty;
+}
+
 HexGrid::Disk::Disk(int x, int y,float tileSize,Transform gridClose)
 	:x(x)
 	,y(y)
@@ -185,7 +210,6 @@ HexGrid::Disk::Disk(int x, int y,float tileSize,Transform gridClose)
 
 void HexGrid::SwapPicture(int index, bool evil)
 {
-
 	if (evil)
 	{
 		if (m_BoardTiles[index].CurrentTextureNumber - 1 > 0)
