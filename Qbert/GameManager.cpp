@@ -6,6 +6,8 @@
 #include "GridMoveComponent.h"
 #include "FallDownMove.h"
 #include "CoilyAIMove.h"
+#include "SideFall.h"
+
 #include "HexGrid.h"
 #include "Scene.h"
 
@@ -70,15 +72,15 @@ void GameManager::Update(const float& deltaTime)
 			{
 				if (rand() % 2)
 				{
-					SpawnPurpleEnemy(6, 6, "../Data/ugg.png", GridManager::GetInstance().GetCurrentGrid());
+					SpawnPurpleEnemy(6, 6, "../Data/ugg.png", GridManager::GetInstance().GetCurrentGrid(),false);
 				}
 				else
 				{
-					SpawnPurpleEnemy(6, 0, "../Data/WrongWay.png", GridManager::GetInstance().GetCurrentGrid());
+					SpawnPurpleEnemy(6, 0, "../Data/WrongWay.png", GridManager::GetInstance().GetCurrentGrid(),true);
 				}
 				
 
-				m_RedTimer = 0.f;
+				m_PurpleTimer = 0.f;
 			}
 		}
 	}
@@ -181,13 +183,13 @@ void GameManager::SpawnRedEnemy(int gridX, int gridY, std::string image, HexGrid
 	SceneManager::GetInstance().GetActiveScene()->Add(pRed);
 }
 
-void GameManager::SpawnPurpleEnemy(int gridX, int gridY, std::string image, HexGrid* playfield)
+void GameManager::SpawnPurpleEnemy(int gridX, int gridY, std::string image, HexGrid* playfield,bool dir)
 {
 	std::shared_ptr<GameObject> pPurple = std::make_shared<GameObject>();
 	Transform* transform = new Transform(playfield->GetGridPosition(gridX, gridY));
 	pPurple->AddComponent(new TransformComponent(pPurple.get(), transform));
 	pPurple->AddComponent(new TextureRenderComponent(pPurple.get(), image));
-	pPurple->AddComponent(new GridMoveComponent(pPurple.get(), playfield, new FallDownMove(playfield, gridX, gridY,1.f), transform, gridX, gridY));
+	pPurple->AddComponent(new GridMoveComponent(pPurple.get(), playfield, new SideFall(playfield, gridX, gridY,dir,1.f), transform, gridX, gridY));
 
 	SceneManager::GetInstance().GetActiveScene()->Add(pPurple);
 }
@@ -200,5 +202,5 @@ GameManager::GameManager()
 	,m_GreenTimer(0.f)
 	,m_MaxEachType(2)
 {
-	EnemySpawnerSetup(true, 2.f, true, 10.f, true, 4.f, false, 0.f);
+	EnemySpawnerSetup(false, 2.f, false, 10.f, false, 4.f, false, 5.f);
 }

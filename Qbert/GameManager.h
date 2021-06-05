@@ -32,7 +32,7 @@ private:
 	void SpawnCoily(int gridX, int gridY, std::string image, HexGrid* playfield);
 	void SpawnGreenEnemy(int gridX, int gridY, std::string image, HexGrid* playfield);
 	void SpawnRedEnemy(int gridX, int gridY, std::string image, HexGrid* playfield);
-	void SpawnPurpleEnemy(int gridX, int gridY, std::string image, HexGrid* playfield);
+	void SpawnPurpleEnemy(int gridX, int gridY, std::string image, HexGrid* playfield, bool dir);
 
 	TextRenderComponent* m_pScoreText = nullptr;
 

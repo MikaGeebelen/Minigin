@@ -23,36 +23,62 @@ Transform SideFall::UpdateMove(const float& deltaTime)
 	{
 		if (m_pMoveCommand->GetCurrentLoc().IsNearlyEqual(m_pMoveCommand->GetNextLoc()))
 		{
-
+			MoveCommand::MoveDir dir = MoveCommand::MoveDir::LUP;
 			if (m_GoLeft)
 			{
 				if (rand() % 2)
 				{
-					m_pMoveCommand->changeDir(MoveCommand::MoveDir::LUP);
+					dir = MoveCommand::MoveDir::LUP;
+					m_pMoveCommand->changeDir(dir);
 				}
 				else
 				{
-					m_pMoveCommand->changeDir(MoveCommand::MoveDir::LDOWN);
+					dir = MoveCommand::MoveDir::LDOWN;
+					m_pMoveCommand->changeDir(dir);
 				}
 			}
 			else
 			{
 				if (rand() % 2)
 				{
-					m_pMoveCommand->changeDir(MoveCommand::MoveDir::RUP);
+					dir = MoveCommand::MoveDir::RUP;
+					m_pMoveCommand->changeDir(dir);
 				}
 				else
 				{
-					m_pMoveCommand->changeDir(MoveCommand::MoveDir::RDOWN);
+					dir = MoveCommand::MoveDir::RDOWN;
+					m_pMoveCommand->changeDir(dir);
 				}
 			}
-
+			glm::ivec2 pos =  m_pMoveCommand->GetCoords();
 			m_pMoveCommand->Execute();
 			m_IsMoving = true;
 			if (m_pMoveCommand->GetNextLoc().IsNearlyEqual(Transform()))
 			{
+				if (dir == MoveCommand::MoveDir::LUP)
+				{
+					dir = MoveCommand::MoveDir::LDOWN;
+				}
+				else if (dir == MoveCommand::MoveDir::LDOWN)
+				{
+					dir = MoveCommand::MoveDir::LUP;
+				}
+				else if (dir == MoveCommand::MoveDir::RUP)
+				{
+					dir = MoveCommand::MoveDir::RDOWN;
+				}
+				else if (dir == MoveCommand::MoveDir::RDOWN)
+				{
+					dir = MoveCommand::MoveDir::RUP;
+				}
+				m_pMoveCommand->SetCoords(pos.x, pos.y);
+				m_pMoveCommand->changeDir(dir);
 				m_pMoveCommand->ResetLoc(m_pMoveCommand->GetCurrentLoc());
-				m_CanMove = false;
+				m_pMoveCommand->Execute();
+				if (m_pMoveCommand->GetNextLoc().IsNearlyEqual(Transform()))
+				{
+					m_CanMove = false;
+				}
 			}
 		}
 
