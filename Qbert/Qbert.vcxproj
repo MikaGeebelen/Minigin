@@ -191,6 +191,7 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     <ClCompile Include="..\Minigin\Lives.cpp" />
     <ClCompile Include="..\Minigin\Score.cpp" />
     <ClCompile Include="CoilyAIMove.cpp" />
+    <ClCompile Include="CoilyPlayerMove.cpp" />
     <ClCompile Include="FallDownMove.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GridManager.cpp" />
@@ -213,6 +214,7 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     <ClInclude Include="..\Minigin\Lives.h" />
     <ClInclude Include="..\Minigin\Score.h" />
     <ClInclude Include="CoilyAIMove.h" />
+    <ClInclude Include="CoilyPlayerMove.h" />
     <ClInclude Include="FallDownMove.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GridManager.h" />

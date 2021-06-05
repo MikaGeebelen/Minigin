@@ -40,7 +40,7 @@ Transform FallDownMove::UpdateMove(const float& deltaTime)
 
 		if (!m_IsMoving)
 		{
-			return  m_pMoveCommand->GetCurrentLoc();
+			return m_pMoveCommand->GetCurrentLoc();
 		}
 		else
 		{

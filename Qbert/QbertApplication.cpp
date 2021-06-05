@@ -20,6 +20,7 @@
 #include "MenuComponent.h"
 //movement rules
 #include "PlayerMove.h"
+#include "CoilyPlayerMove.h"
 //observer
 #include <Observer.h>
 #include "Lives.h"
@@ -248,7 +249,14 @@ int LuaAddPlayer(lua_State* pL)
 	pQbert->AddComponent(new TextureRenderComponent(pQbert.get(), lua_tostring(pL, 5)));
 	SubjectComponent* pQSub = new SubjectComponent(pQbert.get());
 	pQbert->AddComponent(pQSub);
-	pQbert->AddComponent(new GridMoveComponent(pQbert.get(), pGrid, new PlayerMove((int)lua_tonumber(pL, 2), pGrid, (int)lua_tonumber(pL, 3), (int)lua_tonumber(pL, 4)), transform, (int)lua_tonumber(pL, 3), (int)lua_tonumber(pL, 4),lua_toboolean(pL, 6), lua_toboolean(pL, 7)));
+	if (lua_toboolean(pL, 6))
+	{
+		pQbert->AddComponent(new GridMoveComponent(pQbert.get(), pGrid, new PlayerMove((int)lua_tonumber(pL, 2), pGrid, (int)lua_tonumber(pL, 3), (int)lua_tonumber(pL, 4)), transform, (int)lua_tonumber(pL, 3), (int)lua_tonumber(pL, 4), lua_toboolean(pL, 6), lua_toboolean(pL, 7)));
+	}
+	else
+	{
+		pQbert->AddComponent(new GridMoveComponent(pQbert.get(), pGrid, new CoilyPlayerMove((int)lua_tonumber(pL, 2), pGrid, (int)lua_tonumber(pL, 3), (int)lua_tonumber(pL, 4)), transform, (int)lua_tonumber(pL, 3), (int)lua_tonumber(pL, 4), lua_toboolean(pL, 6), lua_toboolean(pL, 7)));
+	}
 
 	auto scene = SceneManager::GetInstance().GetScene(lua_tostring(pL, 1));
 	scene->Add(pQbert);
