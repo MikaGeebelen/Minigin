@@ -43,7 +43,7 @@ Transform PlayerMove::UpdateMove(const float& deltaTime)
 		{
 			if (!m_MoveCommands[i]->GetNextLoc().IsNearlyEqual(Transform()))
 			{
-				m_ActiveMoveCommand = i;
+				m_ActiveMoveCommand = (int)i;
 				SetMovementActive(false);
 				m_IsMoving = true;
 			}

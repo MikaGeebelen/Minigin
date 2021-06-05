@@ -6,8 +6,9 @@
 #include "glm/gtx/compatibility.hpp"
 #pragma warning(pop)
 
-Move::Move(int x,int y)
+Move::Move(int x,int y,float moveTime)
 	:m_GridPos(x,y)
+	,m_MaxMoveTime(moveTime)
 {
 }
 
@@ -16,6 +17,11 @@ Move::Move(int x,int y)
 glm::ivec2 Move::GetGridPos()
 {
 	return m_GridPos;
+}
+
+bool Move::GetCanMove()
+{
+	return m_CanMove;
 }
 
 Transform Move::LerpPos(glm::vec3 current, glm::vec3 next)

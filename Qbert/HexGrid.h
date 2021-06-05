@@ -14,9 +14,11 @@ public:
 	HexGrid(Transform position, float tileSize ,int height, int states,std::vector<std::string> images, bool cycles = false);
 	
 	Transform GetGridPosition(int x, int y);
-	void TouchTile(int x, int y, bool evil = false);
+	bool TouchTile(int x, int y, bool evil = false);
 	SubjectComponent* GetSubject();
 
+	glm::ivec2 GetClosestPlayerLoc(int x, int y);
+	
 	std::shared_ptr<GameObject> SpawnDiskTile();
 	
 	std::vector<std::shared_ptr<GameObject>> GetGameObjects();
@@ -34,9 +36,11 @@ public:
 		int x;
 		int y;
 		CharacterType type;
+		GameObject* pObject;
 	};
 	
-	void SetOccupied(int x, int y, CharacterType type);
+	void SetOccupied(int x, int y, CharacterType type, GameObject* pObject);
+	void DestroyObjectOnSpace(int x, int y);
 	CharacterType GetIsTileOccupied(int x, int y);
 	
 	struct Tile
@@ -57,8 +61,8 @@ public:
 
 private:
 
-	void SwapPicture(int index, bool evil = false);
-	void IsLevelFinished();
+	bool SwapPicture(int index, bool evil = false);
+	bool IsLevelFinished();
 
 	bool m_IsLevelFinished;
 	float m_Size;

@@ -4,9 +4,11 @@
 #include <Components.h>
 
 #include "ResourceManager.h"
+#include "SceneManager.h"
 
 //level events
 #include "LevelEvent.h"
+#include "Scene.h"
 
 HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std::vector<std::string> images, bool cycles)
 	:m_Height(height)
@@ -31,8 +33,8 @@ HexGrid::HexGrid(Transform position,float tileSize, int height, int states, std:
 		offset += ((height-1) - i);
 	}
 
-	float tempWidth = sqrt(3.f) * tileSize;
-	float tempHeight = 2 * tileSize;
+	float tempWidth = 2 * tileSize;
+	float tempHeight = sqrt(3.f) * tileSize;
 	float pyramidWidthOffset = tileSize;
 	for (int x{};x<height;x++)
 	{
@@ -103,7 +105,7 @@ Transform HexGrid::GetGridPosition(int x, int y)
 	return *m_TilePositions[index];
 }
 
-void HexGrid::TouchTile(int x, int y, bool evil)
+bool HexGrid::TouchTile(int x, int y, bool evil)
 {
 	//	 index layout
 	//	        [y,x]
@@ -113,8 +115,7 @@ void HexGrid::TouchTile(int x, int y, bool evil)
 
 	if (x >= m_Height || y > x || y < 0 || x < 0)
 	{
-		SwapPicture(0, evil);
-		return;
+		return SwapPicture(0, evil);
 	}
 	
 	int offset = x * 2;
@@ -124,12 +125,38 @@ void HexGrid::TouchTile(int x, int y, bool evil)
 	}
 
 	int index = offset - y;
-	SwapPicture(index, evil);
+	return SwapPicture(index, evil);
 }
 
 SubjectComponent* HexGrid::GetSubject()
 {
 	return m_pSubject;
+}
+
+glm::ivec2 HexGrid::GetClosestPlayerLoc(int x, int y)
+{
+	std::vector<glm::ivec2> playerPositions;
+	for (TileOccupation tile : m_Occupations)
+	{
+		if (tile.type == CharacterType::Player)
+		{
+			return glm::ivec2(tile.x, tile.y);
+		}
+	}
+
+	int distance = INT_MAX;
+	glm::ivec2 closestPos{};
+	for (glm::ivec2 pos : playerPositions)
+	{
+		int newDistance = pos.x - x + pos.y - y;
+		if (newDistance < distance)
+		{
+			distance = newDistance;
+			closestPos = pos;
+		}
+	}
+	
+	return closestPos;
 }
 
 std::shared_ptr<GameObject> HexGrid::SpawnDiskTile()
@@ -158,17 +185,29 @@ std::vector<std::shared_ptr<GameObject>> HexGrid::GetGameObjects()
 	return m_GameObjects;
 }
 
-void HexGrid::SetOccupied(int x, int y, CharacterType type)
+void HexGrid::SetOccupied(int x, int y, CharacterType type, GameObject* pObject)
 {
 	for (TileOccupation& tile : m_Occupations)
 	{
 		if (tile.x == x && tile.y == y)
 		{
 			tile.type = type;
+			tile.pObject = pObject;
 			return;
 		}
 	}
-	m_Occupations.push_back({x,y,type});
+	m_Occupations.push_back({x,y,type,pObject});
+}
+
+void HexGrid::DestroyObjectOnSpace(int x, int y)
+{
+	for (TileOccupation tile : m_Occupations)
+	{
+		if (tile.x == x && tile.y == y)
+		{
+			SceneManager::GetInstance().GetActiveScene()->RemoveObject(tile.pObject);
+		}
+	}
 }
 
 HexGrid::CharacterType HexGrid::GetIsTileOccupied(int x, int y)
@@ -208,11 +247,11 @@ HexGrid::Disk::Disk(int x, int y,float tileSize,Transform gridClose)
 	
 }
 
-void HexGrid::SwapPicture(int index, bool evil)
+bool HexGrid::SwapPicture(int index, bool evil)
 {
 	if (evil)
 	{
-		if (m_BoardTiles[index].CurrentTextureNumber - 1 > 0)
+		if (m_BoardTiles[index].CurrentTextureNumber  > 0)
 		{
 			m_BoardTiles[index].CurrentTextureNumber--;
 		}
@@ -237,17 +276,18 @@ void HexGrid::SwapPicture(int index, bool evil)
 	}
 	
 	m_BoardTiles[index].pTextureRenderer->SetTexture(m_Textures[m_BoardTiles[index].CurrentTextureNumber]);
-	IsLevelFinished();
+	return IsLevelFinished();
 }
 
-void HexGrid::IsLevelFinished()
+bool HexGrid::IsLevelFinished()
 {
 	for (Tile tile : m_BoardTiles)
 	{
 		if (tile.CurrentTextureNumber != m_States - 1)
 		{
-			return;
+			return false;
 		}
 	}
 	m_pSubject->Notify(new LevelEvent(LevelEvent::LevelEvents::LevelFinished));
+	return true;
 }

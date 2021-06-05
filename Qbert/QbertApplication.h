@@ -10,8 +10,10 @@ public:
 	void UserInitialize() override;
 	void UserLoadGame() const override;
 	void UserCleanup() override;
-
+	void GameUpdate(const float& deltaTime) override;
+	
 	void StartGame(const std::string& gameMode) const;
+
 };
 
 

@@ -2,7 +2,7 @@
 #include "Singleton.h"
 #include <vector>
 #include <memory>
-
+#include <string>
 
 class Scene;
 struct lua_State;

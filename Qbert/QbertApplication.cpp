@@ -213,6 +213,11 @@ void QbertApplication::UserCleanup()
 	SceneManager::GetInstance().CloseLua();
 }
 
+void QbertApplication::GameUpdate(const float& deltaTime)
+{
+	GameManager::GetInstance().Update(deltaTime);
+}
+
 void QbertApplication::StartGame(const std::string& gameMode) const
 {
 	std::vector<SceneManager::LuaFunctions> functions{};
@@ -241,12 +246,31 @@ int LuaAddPlayer(lua_State* pL)
 	
 	pQbert->AddComponent(new TransformComponent(pQbert.get(), transform));
 	pQbert->AddComponent(new TextureRenderComponent(pQbert.get(), lua_tostring(pL, 5)));
-	pQbert->AddComponent(new SubjectComponent(pQbert.get()));
-	pQbert->AddComponent(new GridMoveComponent(pQbert.get(), pGrid, new PlayerMove((int)lua_tonumber(pL, 2), pGrid, (int)lua_tonumber(pL, 3), (int)lua_tonumber(pL, 4)), transform, (int)lua_tonumber(pL, 3), (int)lua_tonumber(pL, 4), true, true));
+	SubjectComponent* pQSub = new SubjectComponent(pQbert.get());
+	pQbert->AddComponent(pQSub);
+	pQbert->AddComponent(new GridMoveComponent(pQbert.get(), pGrid, new PlayerMove((int)lua_tonumber(pL, 2), pGrid, (int)lua_tonumber(pL, 3), (int)lua_tonumber(pL, 4)), transform, (int)lua_tonumber(pL, 3), (int)lua_tonumber(pL, 4),lua_toboolean(pL, 6), lua_toboolean(pL, 7)));
 
 	auto scene = SceneManager::GetInstance().GetScene(lua_tostring(pL, 1));
 	scene->Add(pQbert);
 
+	if ((int)lua_tonumber(pL, 2) == 1)
+	{
+		auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
+
+		std::shared_ptr<GameObject> livesTracker = std::make_shared<GameObject>();
+		livesTracker->AddComponent(new TransformComponent(livesTracker.get(), 50.f, 50.f, 0.f));
+		TextRenderComponent* pLives = new TextRenderComponent(livesTracker.get(), "Lives: " + std::to_string(GameManager::GetInstance().GetLives()), font);
+		livesTracker->AddComponent(pLives);
+		scene->Add(livesTracker);
+
+		std::shared_ptr<GameObject> scoreTracker = std::make_shared<GameObject>();
+		scoreTracker->AddComponent(new TransformComponent(scoreTracker.get(), 50.f, 80.f, 0.f));
+		TextRenderComponent* pScore = new TextRenderComponent(scoreTracker.get(), "Score: 0", font);
+		scoreTracker->AddComponent(pScore);
+		scene->Add(scoreTracker);
+
+		GameManager::GetInstance().SetScoreTextComponent(pScore);
+	}
 	return 0;
 }
 
@@ -271,9 +295,11 @@ int LuaGenerateGrid(lua_State* pL)
 	int level = GameManager::GetInstance().GetLevel();
 	lua_getglobal(pL, "gameMode");
 	std::string gameMode = lua_tostring(pL, -1);
+	
 
 	std::shared_ptr<GameObject> go = std::make_shared<GameObject>();
-	ObserverComponent* pLevelObserver = new ObserverComponent(go.get(), new LevelObserver(level, gameMode));
+	
+	ObserverComponent* pLevelObserver = new ObserverComponent(go.get(), new LevelObserver(level,GameManager::GetInstance().GetLives(), gameMode));
 	GridManager::GetInstance().GetCurrentGrid()->GetSubject()->AddObserver(pLevelObserver);
 	go->AddComponent(pLevelObserver);
 	scene->Add(go);
@@ -301,7 +327,6 @@ int LuaCreateScene(lua_State* pL)
 int LuaSetSceneActive(lua_State* pL)
 {
 	SceneManager::GetInstance().SetSceneActive(lua_tostring(pL, 1));
-	GameManager::GetInstance().SpawnCoily(0, 0, "../Data/Coily.png", GridManager::GetInstance().GetCurrentGrid());
 	return 0;
 }
 

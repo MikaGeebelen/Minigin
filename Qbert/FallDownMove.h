@@ -5,7 +5,7 @@ class MoveCommand;
 class FallDownMove final : public Move
 {
 public:
-	FallDownMove(HexGrid* pCurrentGrid, int x, int y);
+	FallDownMove(HexGrid* pCurrentGrid, int x, int y,float moveTime = 0.5f);
 	
 	virtual ~FallDownMove();
 	FallDownMove(const FallDownMove& other) = delete;

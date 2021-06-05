@@ -18,7 +18,10 @@ void Scene::Update(const float& deltaTime)
 {
 	for(auto& object : m_Objects)
 	{
-		object->Update(deltaTime);
+		if (object != nullptr)
+		{
+			object->Update(deltaTime);
+		}
 	}
 }
 
@@ -38,6 +41,17 @@ void Scene::SetIsSceneActive(bool isSceneActive)
 bool Scene::GetIsSceneActive()
 {
 	return  m_IsSceneActive;
+}
+
+void Scene::RemoveObject(GameObject* pObject)
+{
+	for (auto& object : m_Objects)
+	{
+		if (object.get() == pObject)
+		{
+			m_Objects.erase(std::find(m_Objects.begin(), m_Objects.end(), object));
+		}
+	}
 }
 
 void Scene::ClearScene()

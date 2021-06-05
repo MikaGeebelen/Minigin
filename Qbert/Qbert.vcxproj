@@ -119,7 +119,7 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>D:\Programming\Minigin\3rdParty\SDL2_mixer-2.0.4\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\Lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\Imgui-1.81;D:\Programming\Minigin\3rdParty\SDL2_mixer-2.0.4\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\Lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -169,7 +169,7 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>D:\Programming\Minigin\3rdParty\SDL2_mixer-2.0.4\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\Lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\Imgui-1.81;D:\Programming\Minigin\3rdParty\SDL2_mixer-2.0.4\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\Lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -190,6 +190,7 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
   <ItemGroup>
     <ClCompile Include="..\Minigin\Lives.cpp" />
     <ClCompile Include="..\Minigin\Score.cpp" />
+    <ClCompile Include="CoilyAIMove.cpp" />
     <ClCompile Include="FallDownMove.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GridManager.cpp" />
@@ -206,10 +207,12 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="PlayerMove.cpp" />
     <ClCompile Include="QbertApplication.cpp" />
+    <ClCompile Include="SideFall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Minigin\Lives.h" />
     <ClInclude Include="..\Minigin\Score.h" />
+    <ClInclude Include="CoilyAIMove.h" />
     <ClInclude Include="FallDownMove.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GridManager.h" />
@@ -225,6 +228,7 @@ xcopy "$(SolutionDir)3rdParty\Lua\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="PlayerMove.h" />
     <ClInclude Include="QbertApplication.h" />
+    <ClInclude Include="SideFall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

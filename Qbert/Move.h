@@ -8,7 +8,7 @@ class Transform;
 class Move
 {
 public:
-	Move(int x, int y);
+	Move(int x, int y, float moveTime = 0.5f);
 	virtual ~Move() = default;
 	Move(const Move& other) = delete;
 	Move(Move&& other) = delete;
@@ -17,6 +17,7 @@ public:
 	
 	virtual Transform UpdateMove(const float& deltaTime) = 0;
 	virtual glm::ivec2 GetGridPos();
+	virtual bool GetCanMove();
 protected:
 	const float m_MaxMoveTime = 0.5f;
 	float m_MoveTime = 0.f;

@@ -16,6 +16,7 @@ public:
 	void SetIsSceneActive(bool isSceneActive);
 	bool GetIsSceneActive();
 
+	void RemoveObject(GameObject* object);
 	void ClearScene();
 	
 	const std::string& GetSceneName();
@@ -33,6 +34,8 @@ private:
 	std::vector < std::shared_ptr<GameObject>> m_Objects{};
 	bool m_IsSceneActive;
 	static unsigned int m_IdCounter;
+
+	std::vector<std::vector<std::shared_ptr<GameObject>>::iterator> m_MarkedForDelete;
 };
 
 

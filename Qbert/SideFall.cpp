@@ -1,39 +1,57 @@
-#include "FallDownMove.h"
+#include "SideFall.h"
 
 #include "HexGrid.h"
 #include "MoveCommand.h"
 
-FallDownMove::FallDownMove(HexGrid* pCurrentGrid, int x, int y,float moveTime)
-	:Move(x, y,moveTime)
+SideFall::SideFall(HexGrid* pCurrentGrid, int x, int y, bool IsGoingLeft, float moveTime)
+	:Move(x, y, moveTime)
 	,m_pGrid(pCurrentGrid)
+	,m_GoLeft(IsGoingLeft)
 {
-	m_pMoveCommand = new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LDOWN,m_GridPos.x,m_GridPos.y);
+	m_pMoveCommand = new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LDOWN, m_GridPos.x, m_GridPos.y);
 }
 
-FallDownMove::~FallDownMove()
+SideFall::~SideFall()
 {
 	delete m_pMoveCommand;
 	m_pMoveCommand = nullptr;
 }
 
-Transform FallDownMove::UpdateMove(const float& deltaTime)
+Transform SideFall::UpdateMove(const float& deltaTime)
 {
 	if (m_CanMove)
 	{
 		if (m_pMoveCommand->GetCurrentLoc().IsNearlyEqual(m_pMoveCommand->GetNextLoc()))
 		{
-			if (rand() % 2)
+
+			if (m_GoLeft)
 			{
-				m_pMoveCommand->changeDir(MoveCommand::MoveDir::LDOWN);
+				if (rand() % 2)
+				{
+					m_pMoveCommand->changeDir(MoveCommand::MoveDir::LUP);
+				}
+				else
+				{
+					m_pMoveCommand->changeDir(MoveCommand::MoveDir::LDOWN);
+				}
 			}
 			else
 			{
-				m_pMoveCommand->changeDir(MoveCommand::MoveDir::RDOWN);
+				if (rand() % 2)
+				{
+					m_pMoveCommand->changeDir(MoveCommand::MoveDir::RUP);
+				}
+				else
+				{
+					m_pMoveCommand->changeDir(MoveCommand::MoveDir::RDOWN);
+				}
 			}
+
 			m_pMoveCommand->Execute();
 			m_IsMoving = true;
 			if (m_pMoveCommand->GetNextLoc().IsNearlyEqual(Transform()))
 			{
+				m_pMoveCommand->ResetLoc(m_pMoveCommand->GetCurrentLoc());
 				m_CanMove = false;
 			}
 		}

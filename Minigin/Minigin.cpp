@@ -97,6 +97,7 @@ void Minigin::Run()
 			
 			doContinue = input.ProcessInput();
 			sceneManager.Update(deltaTime);
+			GameUpdate(deltaTime);
 			renderer.Render();
 
 			lastTime = currentTime;
