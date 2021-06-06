@@ -1,5 +1,5 @@
 #include "QbertApplication.h"
-#include "vld.h"
+//#include "vld.h"
 int main(int, char* [])
 {
 	QbertApplication engine;

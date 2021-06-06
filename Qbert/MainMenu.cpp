@@ -37,6 +37,16 @@ void MainMenu::render()
 			m_GameMode = "levelvs";
 		}
 
+		ImGui::Text("------Controls KeyBoard------");
+		ImGui::Text("player1 QWAS to move");
+		ImGui::Text("player2 IOKL to move");
+		ImGui::Text("-----------------------------");
+		ImGui::Text("");
+		ImGui::Text("-----Controls Controller-----");
+		ImGui::Text("player1 FaceButtons to move");
+		ImGui::Text("player2 FaceButtons to move");
+		ImGui::Text("-----------------------------");
+		
 		ImGui::Render();
 		ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 	}

@@ -60,7 +60,6 @@ void QbertApplication::UserInitialize()
 
 void QbertApplication::UserLoadGame() const
 {
-	std::cout << "yes";
 	GameManager::GetInstance().SetGame(this);
 	StartGame();
 }
