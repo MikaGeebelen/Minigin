@@ -20,9 +20,12 @@ void SoundSystem::play(std::string soundPath, int volume)
 	{
 		m_IsThreadRunning = true;
 		Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
-		Mix_Chunk* pSound = Mix_LoadWAV(soundPath.c_str());
-		pSound->volume = (Uint8)volume;
-		m_SoundsToPlay.push_back(pSound);
+		if (m_CreatedSounds[soundPath] == nullptr)
+		{
+			m_CreatedSounds[soundPath] = Mix_LoadWAV(soundPath.c_str());
+		}
+		m_CreatedSounds[soundPath]->volume = (Uint8)volume;
+		m_SoundsToPlay.push_back(m_CreatedSounds[soundPath]);
 		
 		std::thread audioThread{ [this]()
 		{
@@ -45,9 +48,12 @@ void SoundSystem::play(std::string soundPath, int volume)
 	else
 	{
 		std::lock_guard<std::mutex> lock{ m_Mutex };
-		Mix_Chunk* pSound = Mix_LoadWAV(soundPath.c_str());
-		pSound->volume = (Uint8)volume;
-		m_SoundsToPlay.push_back(pSound);
+		if (m_CreatedSounds[soundPath] == nullptr)
+		{
+			m_CreatedSounds[soundPath] = Mix_LoadWAV(soundPath.c_str());
+		}
+		m_CreatedSounds[soundPath]->volume = (Uint8)volume;
+		m_SoundsToPlay.push_back(m_CreatedSounds[soundPath]);
 	}
 }
 

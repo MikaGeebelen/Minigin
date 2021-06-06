@@ -2,6 +2,7 @@
 #include "SDL_mixer.h"
 #include <list>
 #include <mutex>
+#include "map"
 class BaseSoundSystem
 {
 public:
@@ -10,6 +11,7 @@ public:
 protected:
 	std::mutex m_Mutex{};
 	bool m_IsThreadRunning = false;
+	std::map<std::string, Mix_Chunk*> m_CreatedSounds;
 };
 
 class NullSoundSystem final: public BaseSoundSystem
