@@ -5,9 +5,7 @@ bool InputManager::ProcessInput()
 {
 	DWORD result;
 	
-	ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
-	result = XInputGetState(0, &m_CurrentState);
-
+	
 
 	SDL_Event e;
 	while (SDL_PollEvent(&e))
@@ -35,9 +33,10 @@ bool InputManager::ProcessInput()
 		}
 	}
 
-	
 	for (std::pair<std::string,InputInfo> pair : m_ConsoleCommands)
 	{
+		ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
+		result = XInputGetState(pair.second.playerNum, &m_CurrentState);
 		switch (pair.second.actionType)
 		{
 		case ActionType::pressed:
@@ -68,12 +67,22 @@ void InputManager::ClearInput()
 {
 	for (std::pair<std::string, KeyBoardInputInfo> pair : m_KeyBoardCommands)
 	{
-		delete pair.second.command;
+		if (pair.second.command != nullptr)
+		{
+			delete pair.second.command;
+			pair.second.command = nullptr;
+		}
 	}
+	m_KeyBoardCommands.clear();
 	for (std::pair<std::string, InputInfo> pair : m_ConsoleCommands)
 	{
-		delete pair.second.command;
+		if (pair.second.command != nullptr)
+		{
+			delete pair.second.command;
+			pair.second.command;
+		}
 	}
+	m_ConsoleCommands.clear();
 }
 
 bool InputManager::IsPressed(const std::string& buttonName)
@@ -109,9 +118,9 @@ bool InputManager::IsReleased(const std::string& buttonName)
 	return false;
 }
 
-void InputManager::AddControllerCommand(unsigned int gamepadBitMask, std::string commandName, ActionType action, Command* command)
+void InputManager::AddControllerCommand(int playerNum,unsigned int gamepadBitMask, std::string commandName, ActionType action, Command* command)
 {
-	InputInfo key(gamepadBitMask, action,command);
+	InputInfo key(playerNum,gamepadBitMask, action,command);
 	m_ConsoleCommands[commandName] = key;
 }
 

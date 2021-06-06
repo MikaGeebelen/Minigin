@@ -18,6 +18,7 @@ public:
 	virtual Transform UpdateMove(const float& deltaTime) = 0;
 	virtual glm::ivec2 GetGridPos();
 	virtual bool GetCanMove();
+	virtual bool GetIsMoving();
 protected:
 	const float m_MaxMoveTime = 0.5f;
 	float m_MoveTime = 0.f;

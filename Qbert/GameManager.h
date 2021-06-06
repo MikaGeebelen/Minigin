@@ -4,12 +4,16 @@
 #include <string>
 class GameObject;
 class HexGrid;
+class QbertApplication;
 
 class TextRenderComponent;
 
 class GameManager final : public Singleton<GameManager>
 {
 public:
+	void SetGame(const QbertApplication* app);
+	const QbertApplication* GetGame();
+	
 	void Update(const float& deltaTime);
 	void Reset();
 	
@@ -17,10 +21,14 @@ public:
 	void SetLevel(int level);
 
 	int GetLives();
+	void IncreaseLives(int Lives);
+	void DecreaseLives(int Lives);
 	void SetLives(int Lives);
 
 	void SetScoreTextComponent(TextRenderComponent* Lives);
-	void SetScore(int Lives);
+	void SetScore(int score);
+	void IncreaseScore(int score);
+	
 	int GetScore();
 	
 	void EnemySpawnerSetup(bool coilyActive, float coilyRespawnTime, bool greenEnemy, float greenEnemyRespawnTime, bool redEnemy, float redEnemyRespawnTime, bool purpleEnemy, float purpleEnemyRespawnTime);
@@ -35,7 +43,8 @@ private:
 	void SpawnPurpleEnemy(int gridX, int gridY, std::string image, HexGrid* playfield, bool dir);
 
 	TextRenderComponent* m_pScoreText = nullptr;
-
+	const QbertApplication* m_pGame = nullptr;
+	
 	int m_Score;
 	int m_level;
 	int m_Lives = 3;

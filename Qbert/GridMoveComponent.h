@@ -21,7 +21,7 @@ private:
 	int m_X;
 	int m_Y;
 	Transform* m_pPosition;
-
+	
 	bool m_CanChangeBlocks;
 	bool m_IncreaseBlocks;
 };

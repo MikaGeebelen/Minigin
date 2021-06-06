@@ -12,8 +12,7 @@ public:
 	void UserCleanup() override;
 	void GameUpdate(const float& deltaTime) override;
 	
-	void StartGame(const std::string& gameMode) const;
-
+	void StartGame() const;
 };
 
 

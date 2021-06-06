@@ -14,6 +14,18 @@
 #include "SceneManager.h"
 #include "GridManager.h"
 
+#include "QbertApplication.h"
+
+void GameManager::SetGame(const QbertApplication* app)
+{
+	m_pGame = app;
+}
+
+const QbertApplication* GameManager::GetGame()
+{
+	return m_pGame;
+}
+
 void GameManager::Update(const float& deltaTime)
 {
 	if (GridManager::GetInstance().GetCurrentGrid() != nullptr)
@@ -23,7 +35,7 @@ void GameManager::Update(const float& deltaTime)
 			m_CoilyTimer += deltaTime;
 			if (m_CoilyTimer > m_CoilyRespawnTime && !(Coilys >= 1) && m_IsCoilyActivies)
 			{
-				SpawnCoily(0, 0, "../Data/Coily.png", GridManager::GetInstance().GetCurrentGrid());
+				SpawnCoily(0, 0, "Data/Coily.png", GridManager::GetInstance().GetCurrentGrid());
 				Coilys++;
 				m_CoilyTimer = 0.f;
 			}
@@ -37,11 +49,11 @@ void GameManager::Update(const float& deltaTime)
 				std::string picture;
 				if (rand()%2)
 				{
-					picture = "../Data/Sam.png";
+					picture = "Data/Sam.png";
 				}
 				else
 				{
-					picture = "../Data/Slick.png";
+					picture = "Data/Slick.png";
 				}
 				SpawnGreenEnemy(0, 0, picture, GridManager::GetInstance().GetCurrentGrid());
 				m_GreenTimer = 0.f;
@@ -55,11 +67,11 @@ void GameManager::Update(const float& deltaTime)
 			{
 				if (rand() % 2)
 				{
-					SpawnRedEnemy(1, 0, "../Data/Orb.png", GridManager::GetInstance().GetCurrentGrid());
+					SpawnRedEnemy(1, 0, "Data/Orb.png", GridManager::GetInstance().GetCurrentGrid());
 				}
 				else
 				{
-					SpawnRedEnemy(1, 1, "../Data/Orb.png", GridManager::GetInstance().GetCurrentGrid());
+					SpawnRedEnemy(1, 1, "Data/Orb.png", GridManager::GetInstance().GetCurrentGrid());
 				}
 				m_RedTimer = 0.f;
 			}
@@ -72,11 +84,11 @@ void GameManager::Update(const float& deltaTime)
 			{
 				if (rand() % 2)
 				{
-					SpawnPurpleEnemy(6, 6, "../Data/ugg.png", GridManager::GetInstance().GetCurrentGrid(),false);
+					SpawnPurpleEnemy(6, 6, "Data/ugg.png", GridManager::GetInstance().GetCurrentGrid(),false);
 				}
 				else
 				{
-					SpawnPurpleEnemy(6, 0, "../Data/WrongWay.png", GridManager::GetInstance().GetCurrentGrid(),true);
+					SpawnPurpleEnemy(6, 0, "Data/WrongWay.png", GridManager::GetInstance().GetCurrentGrid(),true);
 				}
 				
 
@@ -110,6 +122,16 @@ int GameManager::GetLives()
 	return m_Lives;
 }
 
+void GameManager::IncreaseLives(int Lives)
+{
+	m_Lives += Lives;
+}
+
+void GameManager::DecreaseLives(int Lives)
+{
+	m_Lives -= Lives;
+}
+
 void GameManager::SetLives(int Lives)
 {
 	m_Lives = Lives;
@@ -120,9 +142,18 @@ void GameManager::SetScoreTextComponent(TextRenderComponent* pScore)
 	m_pScoreText = pScore;
 }
 
-void GameManager::SetScore(int Lives)
+void GameManager::SetScore(int score)
 {
-	m_Score = Lives;
+	m_Score = score;
+	if (m_pScoreText != nullptr)
+	{
+		m_pScoreText->SetText("Score: " + std::to_string(m_Score));
+	}
+}
+
+void GameManager::IncreaseScore(int score)
+{
+	m_Score += score;
 	if (m_pScoreText != nullptr)
 	{
 		m_pScoreText->SetText("Score: " + std::to_string(m_Score));

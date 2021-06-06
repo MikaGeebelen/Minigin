@@ -14,23 +14,39 @@ CoilyPlayerMove::CoilyPlayerMove(int playerNum, HexGrid* pCurrentGrid, int x, in
 	{
 		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LUP, m_GridPos.x, m_GridPos.y));
 		InputManager::GetInstance().AddKeyBoardCommand("1LUP", SDL_SCANCODE_Q, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LUP, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddControllerCommand(0, XINPUT_GAMEPAD_X, "1CONLUP", ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
 		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RUP, m_GridPos.x, m_GridPos.y));
-		InputManager::GetInstance().AddKeyBoardCommand("1RUP", SDL_SCANCODE_E, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		InputManager::GetInstance().AddKeyBoardCommand("1RUP", SDL_SCANCODE_W, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RUP, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddControllerCommand(0, XINPUT_GAMEPAD_Y, "1CONRUP", ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
 		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LDOWN, m_GridPos.x, m_GridPos.y));
-		InputManager::GetInstance().AddKeyBoardCommand("1LDOWN", SDL_SCANCODE_Z, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		InputManager::GetInstance().AddKeyBoardCommand("1LDOWN", SDL_SCANCODE_A, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LDOWN, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddControllerCommand(0, XINPUT_GAMEPAD_A, "1CONLDOWN", ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
 		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RDOWN, m_GridPos.x, m_GridPos.y));
-		InputManager::GetInstance().AddKeyBoardCommand("1RDOWN", SDL_SCANCODE_C, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		InputManager::GetInstance().AddKeyBoardCommand("1RDOWN", SDL_SCANCODE_S, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RDOWN, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddControllerCommand(0, XINPUT_GAMEPAD_B, "1CONRDOWN", ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
 	}
 	else if (playerNum == 2)
 	{
 		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LUP, m_GridPos.x, m_GridPos.y));
-		InputManager::GetInstance().AddKeyBoardCommand("2LUP", SDL_SCANCODE_7, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		InputManager::GetInstance().AddKeyBoardCommand("2LUP", SDL_SCANCODE_I, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LUP, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddControllerCommand(1, XINPUT_GAMEPAD_X, "2CONLUP", ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
 		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RUP, m_GridPos.x, m_GridPos.y));
-		InputManager::GetInstance().AddKeyBoardCommand("2RUP", SDL_SCANCODE_9, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		InputManager::GetInstance().AddKeyBoardCommand("2RUP", SDL_SCANCODE_O, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RUP, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddControllerCommand(1, XINPUT_GAMEPAD_Y, "2CONRUP", ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
 		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LDOWN, m_GridPos.x, m_GridPos.y));
-		InputManager::GetInstance().AddKeyBoardCommand("2LDOWN", SDL_SCANCODE_1, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		InputManager::GetInstance().AddKeyBoardCommand("2LDOWN", SDL_SCANCODE_K, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::LDOWN, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddControllerCommand(1, XINPUT_GAMEPAD_A, "2CONLDOWN", ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
 		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RDOWN, m_GridPos.x, m_GridPos.y));
-		InputManager::GetInstance().AddKeyBoardCommand("2RDOWN", SDL_SCANCODE_3, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		InputManager::GetInstance().AddKeyBoardCommand("2RDOWN", SDL_SCANCODE_L, ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
+		m_MoveCommands.push_back(new MoveCommand(pCurrentGrid, MoveCommand::MoveDir::RDOWN, m_GridPos.x, m_GridPos.y));
+		InputManager::GetInstance().AddControllerCommand(1, XINPUT_GAMEPAD_B, "2CONRDOWN", ActionType::pressed, m_MoveCommands[m_MoveCommands.size() - 1]);
 	}
 }
 
@@ -120,7 +136,6 @@ Transform CoilyPlayerMove::UpdateMove(const float& deltaTime)
 			}
 			return temp;
 		}
-
 	}
 }
 

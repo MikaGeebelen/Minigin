@@ -9,6 +9,7 @@
 
 #include "SceneManager.h"
 #include "GameManager.h"
+#include "ServiceLocater.h"
 
 GridMoveComponent::GridMoveComponent(GameObject* const parent, HexGrid* pGrid, Move* pMovement, Transform* pObjectPos,int x,int y,bool changeBlocks ,bool increaseBlocks )
 	:BaseComponent(parent,false,true)
@@ -36,9 +37,10 @@ void GridMoveComponent::Update(const float& deltaTime)
 	*m_pPosition = m_pMovementType->UpdateMove(deltaTime);
 
 	glm::ivec2 pos = m_pMovementType->GetGridPos();
+	
 	if (m_X != pos.x || m_Y != pos.y || !m_pMovementType->GetCanMove())
 	{
-		m_pObjectGrid->SetOccupied(m_X, m_Y, HexGrid::CharacterType::Empty,nullptr);
+		m_pObjectGrid->SetOccupied(m_X, m_Y, HexGrid::CharacterType::Empty, nullptr);
 		m_X = pos.x;
 		m_Y = pos.y;
 
@@ -51,7 +53,12 @@ void GridMoveComponent::Update(const float& deltaTime)
 			
 			if (m_IncreaseBlocks)
 			{
-				GameManager::GetInstance().SetScore(GameManager::GetInstance().GetScore() + 25);
+				GameManager::GetInstance().IncreaseScore(25);
+				ServiceLocater::GetSoundSystem().play("Data/Diamond.wav", 5);
+			}
+			else
+			{
+				ServiceLocater::GetSoundSystem().play("Data/Jump.wav", 5);
 			}
 		}
 		
@@ -88,14 +95,14 @@ void GridMoveComponent::Update(const float& deltaTime)
 				m_pParent->GetComponent<SubjectComponent>(); //add points
 				m_pObjectGrid->SetOccupied(m_X, m_Y, HexGrid::CharacterType::Empty, nullptr);
 				SceneManager::GetInstance().GetActiveScene()->RemoveObject(m_pParent);
-				GameManager::GetInstance().SetScore(GameManager::GetInstance().GetScore() + 300);
+				GameManager::GetInstance().IncreaseScore(300);
 				return;
 			}
 			break;
 		case HexGrid::CharacterType::KillableEnemy:
 			m_pParent->GetComponent<SubjectComponent>(); //add points
 			m_pObjectGrid->DestroyObjectOnSpace(m_X, m_Y);
-			GameManager::GetInstance().SetScore(GameManager::GetInstance().GetScore() + 300);
+			GameManager::GetInstance().IncreaseScore(300);
 			break;
 		case HexGrid::CharacterType::Enemy:
 			if (type == HexGrid::CharacterType::Player)

@@ -23,6 +23,7 @@ void SoundSystem::play(std::string soundPath, int volume)
 		Mix_Chunk* pSound = Mix_LoadWAV(soundPath.c_str());
 		pSound->volume = (Uint8)volume;
 		m_SoundsToPlay.push_back(pSound);
+		
 		std::thread audioThread{ [this]()
 		{
 			while (m_IsThreadRunning)
@@ -48,7 +49,6 @@ void SoundSystem::play(std::string soundPath, int volume)
 		pSound->volume = (Uint8)volume;
 		m_SoundsToPlay.push_back(pSound);
 	}
-
 }
 
 LogSoundSystem::LogSoundSystem(BaseSoundSystem* pSoundSysten)

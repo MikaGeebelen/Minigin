@@ -3,6 +3,8 @@
 #include "Event.h"
 #include "MenuEvent.h"
 #include "QbertApplication.h"
+
+#include "SceneManager.h"
 MenuObserver::MenuObserver(const QbertApplication* pApplication)
 	:m_pApp(pApplication)
 {
@@ -13,13 +15,14 @@ void MenuObserver::OnNotify(Event* event)
 	switch ((MenuEvent::MenuEvents)event->GetEvent())
 	{
 	case MenuEvent::MenuEvents::Singleplayer:
-		m_pApp->StartGame("levelp1");
+		//m_pApp->StartGame("levelp1");
+		SceneManager::GetInstance().UseFunction("levelp1", 1);
 		break;
 	case MenuEvent::MenuEvents::MultiPlayer:
-		m_pApp->StartGame("levelp2");
+		SceneManager::GetInstance().UseFunction("levelp2", 1);
 		break;
 	case MenuEvent::MenuEvents::Versus:
-		m_pApp->StartGame("levelvs");
+		SceneManager::GetInstance().UseFunction("levelvs", 1);
 		break;
 	}
 	

@@ -26,14 +26,16 @@ struct InputInfo
 		, command(nullptr)
 		, once(false)
 	{}
-	InputInfo(unsigned int mask, ActionType action, Command* command)
+	InputInfo(int playerNum ,unsigned int mask, ActionType action, Command* command)
 		:bitmask(mask)
 		,actionType(action)
 		,command(command)
 		,once(false)
+		,playerNum(playerNum)
 	{}
 	
 	unsigned int bitmask;
+	int playerNum;
 	ActionType actionType;
 	bool once;
 	Command* command;
@@ -62,7 +64,7 @@ class InputManager final : public Singleton<InputManager>
 public:
 	bool ProcessInput();
 	void ClearInput();
-	void AddControllerCommand(unsigned int gamepadBitMask, std::string commandName, ActionType action, Command* command);
+	void AddControllerCommand(int playerNum,unsigned int gamepadBitMask, std::string commandName, ActionType action, Command* command);
 	void AddKeyBoardCommand(std::string commandName, SDL_Scancode button, ActionType action, Command* command);
 	~InputManager();
 

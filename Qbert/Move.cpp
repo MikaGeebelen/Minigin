@@ -24,6 +24,11 @@ bool Move::GetCanMove()
 	return m_CanMove;
 }
 
+bool Move::GetIsMoving()
+{
+	return m_IsMoving;
+}
+
 Transform Move::LerpPos(glm::vec3 current, glm::vec3 next)
 {
 	Transform newPos{};
